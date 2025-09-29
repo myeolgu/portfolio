@@ -1,18 +1,33 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s;
-
-    &:hover {
-        color: #007BFF; // 강조색
+    &__text {
+        margin: 0;
+        @include flex-column;
+        align-items: flex-start;
+        gap: $spacing-xs;
     }
-}
 
-.logo-icon {
-    margin-right: 10px;
-    width: 40px; // 로고 아이콘의 너비
-    height: 40px; // 로고 아이콘의 높이
+    &__name {
+        font-family: $font-family-secondary;
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $primary-color;
+
+        @include mobile {
+            font-size: $font-size-xl;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-normal;
+        color: $text-light;
+        font-family: $font-family-primary;
+
+        @include mobile {
+            font-size: $font-size-xs;
+        }
+    }
 }

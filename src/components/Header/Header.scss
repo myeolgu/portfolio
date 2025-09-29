@@ -1,31 +1,43 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-header;
+    background-color: rgba($bg-color, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all $transition-speed ease;
+    border-bottom: 1px solid transparent;
+
+    &--scrolled {
+        background-color: rgba($bg-color, 0.98);
+        border-bottom-color: $border-color;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    &__content {
+        @include flex-between;
+        height: $header-height;
+
+        @include mobile {
+            flex-direction: column;
+            height: auto;
+            padding: $spacing-md 0;
+            gap: $spacing-md;
+        }
+    }
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
+// Offset for fixed header
+body {
+    padding-top: $header-height;
 
-.navigation {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-item {
-    padding: 10px 15px;
-    transition: background-color 0.3s;
-    color: #333;
-}
-
-.nav-item:hover {
-    background-color: #e0e0e0;
+    @include mobile {
+        padding-top: 0;
+    }
 }
 
 @media (max-width: 768px) {
