@@ -1,21 +1,23 @@
-import React from 'react';
-import Header from './components/Header/Header';
-import About from './components/About/About';
-import Work from './components/Work/Work';
-import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact';
-import './App.scss';
+import Footer from './components/Layout/Footer/Footer';
+import Header from './components/Layout/Header/Header';
+import About from './components/Pages/About/About';
+import Contact from './components/Pages/Contact/Contact';
+import Projects from './components/Pages/Projects/Projects';
+import Work from './components/Pages/Work/Work';
 
 const App = () => {
-    return (
-        <div className="app">
-            <Header />
-            <About />
-            <Work />
-            <Projects />
-            <Contact />
-        </div>
-    );
+  return (
+    <div className="wrap">
+      <Header />
+      <main className="main">
+        <About />
+        <Work />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
 export default App;

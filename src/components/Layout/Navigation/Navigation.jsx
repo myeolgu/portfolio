@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import './Navigation.scss';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { label: 'ABOUT ME', href: '#about' },
-    { label: 'WORK', href: '#work' },
-    { label: 'PROJECTS', href: '#projects' },
-    { label: 'CONTACT', href: '#contact' },
+    { label: '', href: '#' },
+    { label: '', href: '#' },
+    { label: '', href: '#' },
+    { label: '', href: '#' },
   ];
 
   const handleLinkClick = () => {
@@ -16,17 +15,17 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navigation">
+    <nav className="nav">
       <button className={`navigation__toggle ${isOpen ? 'navigation__toggle--open' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <ul className={`navigation__list ${isOpen ? 'navigation__list--open' : ''}`}>
+      <ul className={`nav-list ${isOpen ? 'nav-list-open' : ''}`}>
         {menuItems.map((item, index) => (
-          <li key={index} className="navigation__item">
-            <a href={item.href} className="navigation__link" onClick={handleLinkClick}>
+          <li key={index} className="nav__item">
+            <a href={item.href} className="nav__link" onClick={handleLinkClick}>
               {item.label}
             </a>
           </li>
