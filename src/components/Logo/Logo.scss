@@ -1,0 +1,18 @@
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+
+    &:hover {
+        color: #007BFF; // 강조색
+    }
+}
+
+.logo-icon {
+    margin-right: 10px;
+    width: 40px; // 로고 아이콘의 너비
+    height: 40px; // 로고 아이콘의 높이
+}

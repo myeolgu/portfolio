@@ -1,0 +1,28 @@
+.nav {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-item {
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+    color: #333;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-item {
+        padding: 8px 12px;
+    }
+}
