@@ -4,10 +4,12 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { label: '', href: '#' },
-    { label: '', href: '#' },
-    { label: '', href: '#' },
-    { label: '', href: '#' },
+    { label: 'ABOUT NEXON', href: '#' },
+    { label: 'PRODUCTS', href: '#' },
+    { label: 'INVESTOR RELATIONS', href: '#' },
+    { label: 'CAREERS', href: '#' },
+    { label: 'CONTACT', href: '#' },
+    { label: 'NEWS', href: '#' },
   ];
 
   const handleLinkClick = () => {

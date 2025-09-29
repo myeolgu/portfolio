@@ -15,9 +15,9 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`header ${scroll ? 'scroll' : ''}`}>
+    <header className={`header${scroll ? ' scroll' : ''}`}>
       <div className="logo">
-        <h1>Logo</h1>
+        <h1>LOGO</h1>
       </div>
       <Navigation />
     </header>
