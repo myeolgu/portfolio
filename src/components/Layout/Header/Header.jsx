@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import Navigation from '../Navigation/Navigation';
 
 const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
+  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      setScrolled(isScrolled);
+      const isScroll = window.scrollY > 50;
+      setScroll(isScroll);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -15,12 +15,11 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
-      <div className="container">
-        <div className="header__content">
-          <Navigation />
-        </div>
+    <header className={`header ${scroll ? 'scroll' : ''}`}>
+      <div className="logo">
+        <h1>Logo</h1>
       </div>
+      <Navigation />
     </header>
   );
 };

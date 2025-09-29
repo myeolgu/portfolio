@@ -1,5 +1,4 @@
-import Footer from './components/Layout/Footer/Footer';
-import Header from './components/Layout/Header/Header';
+import Layout from './components/Layout/Layout';
 import About from './components/Pages/About/About';
 import Contact from './components/Pages/Contact/Contact';
 import Projects from './components/Pages/Projects/Projects';
@@ -7,16 +6,12 @@ import Work from './components/Pages/Work/Work';
 
 const App = () => {
   return (
-    <div className="wrap">
-      <Header />
-      <main className="main">
-        <About />
-        <Work />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <Layout>
+      <About />
+      <Work />
+      <Projects />
+      <Contact />
+    </Layout>
   );
 };
 
