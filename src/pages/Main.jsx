@@ -8,9 +8,9 @@ const Main = () => {
   };
 
   return (
-    <section className="wrap">
+    <div className="wrap">
       {/* 인트로 섹션 */}
-      <section className="video-section">
+      <section className="intro-section">
         <video autoPlay loop muted playsInline className="about-video">
           <source src={require('../assets/videos/video.mp4')} type="video/mp4" />
         </video>
@@ -20,9 +20,9 @@ const Main = () => {
       <section className="about-section">
         <div className="about-container">
           <div className="about-text">
-            <p className="txt">{splitText('DREAMERS')}</p>
-            <p className="txt">{splitText('PIONEERS')}</p>
-            <p className="txt">{splitText('INNOVATORS')}</p>
+            <p className="text">{splitText('DREAMERS')}</p>
+            <p className="text">{splitText('PIONEERS')}</p>
+            <p className="text">{splitText('INNOVATORS')}</p>
           </div>
 
           <div className="about-description">
@@ -33,7 +33,7 @@ const Main = () => {
           </div>
         </div>
       </section>
-    </section>
+    </div>
   );
 };
 
