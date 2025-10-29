@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Navigation from '../Navigation/Navigation';
 
 const Header = () => {
   const [scroll, setScroll] = useState(false);
@@ -19,7 +18,17 @@ const Header = () => {
       <div className="logo">
         <h1>LOGO</h1>
       </div>
-      <Navigation />
+      <nav className="nav">
+        <ul className={`nav-list`}>
+          {['ABOUT NEXON', 'PRODUCTS', 'INVESTOR RELATIONS', 'CAREERS', 'CONTACT', 'NEWS'].map((label, index) => (
+            <li key={index} className="nav-item">
+              <a href="#" className="nav-link">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 };
