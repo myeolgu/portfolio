@@ -20,7 +20,7 @@ const Header: React.FC = () => {
       </div>
       <nav className="nav">
         <ul className={`nav-list`}>
-          {['ABOUT NEXON', 'PRODUCTS', 'INVESTOR RELATIONS', 'CAREERS', 'CONTACT', 'NEWS'].map((label, index) => (
+          {['ABOUT NEXON', 'PRODUCTS', 'CAREERS', 'CONTACT'].map((label, index) => (
             <li key={index} className="nav-item">
               <a href="#" className="nav-link">
                 {label}

@@ -18,8 +18,6 @@ const App: React.FC = () => {
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-
-        <Main />
       </Layout>
     </BrowserRouter>
   );

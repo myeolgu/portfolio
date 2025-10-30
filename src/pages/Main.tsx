@@ -70,10 +70,10 @@ const Main: React.FC = () => {
             by best-in-class Live Operations which keeps the games balanced, and refreshed with new content and experiences. Spanning multiple generations, Nexon games are enjoyed for decades by
             players all over the world.
           </div>
-
-          <a className="about-links">MORE</a>
         </div>
       </section>
+
+      {/*  */}
     </div>
   );
 };
