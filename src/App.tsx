@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import About from './pages/About/About';
@@ -6,7 +7,7 @@ import Main from './pages/Main';
 import Projects from './pages/Projects/Projects';
 import Work from './pages/Work/Work';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Layout>
@@ -17,6 +18,8 @@ const App = () => {
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+
+        <Main />
       </Layout>
     </BrowserRouter>
   );

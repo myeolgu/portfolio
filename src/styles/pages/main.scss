@@ -1,3 +1,6 @@
+@use '../base/mixin.scss' as *;
+
+// 인트로 섹션
 .intro-section {
   width: 100%;
   height: 100vh;
@@ -18,13 +21,12 @@
     height: 6rem;
     background: linear-gradient(to bottom, transparent 0%, #000000 100%);
   }
-
-  @include mobile {}
 }
 
-
+// 소개 섹션
 .about-section {
-  padding: 2rem;
+  position: relative;
+  padding: 8rem 2rem 2rem;
 
   .about-container {
     display: flex;
@@ -46,6 +48,12 @@
       display: flex;
       gap: 0.2rem;
       justify-content: center;
+      overflow: hidden;
+
+      span {
+        position: relative;
+        top: 10rem;
+      }
     }
   }
 

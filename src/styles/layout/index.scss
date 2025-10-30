@@ -1,5 +1,5 @@
-@import './header.scss';
-@import './footer.scss';
+@use './header.scss' as *;
+@use './footer.scss' as *;
 
 .wrap {
     min-height: 200%;

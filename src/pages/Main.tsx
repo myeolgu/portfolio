@@ -1,11 +1,49 @@
-const Main = () => {
-  const splitText = text => {
-    return text.split('').map((char, index) => (
-      <span key={index} className="char">
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const Main: React.FC = () => {
+  const aboutSectionRef = useRef<HTMLElement>(null);
+  const textRefs = useRef<HTMLSpanElement[]>([]);
+
+  // 텍스트 분리
+  const splitText = (text: string): React.ReactElement[] => {
+    return text.split('').map((char: string, index: number) => (
+      <span
+        key={index}
+        ref={el => {
+          if (el && !textRefs.current.includes(el)) {
+            textRefs.current.push(el);
+          }
+        }}
+      >
         {char === ' ' ? '\u00A0' : char}
       </span>
     ));
   };
+
+  useEffect(() => {
+    if (!aboutSectionRef.current) return;
+
+    gsap.to(textRefs.current, {
+      top: 0,
+      duration: 0.3,
+      stagger: 0.025,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: aboutSectionRef.current,
+        start: 'top 80%',
+        end: 'bottom 20%',
+      },
+    });
+
+    // 클린업 함수
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   return (
     <div className="wrap">
@@ -17,7 +55,7 @@ const Main = () => {
       </section>
 
       {/* 소개 섹션 */}
-      <section className="about-section">
+      <section className="about-section" ref={aboutSectionRef}>
         <div className="about-container">
           <div className="about-text">
             <p className="text">{splitText('DREAMERS')}</p>
