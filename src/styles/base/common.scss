@@ -1,0 +1,10 @@
+// button, a 스타일
+button,
+a {
+    transition: transform 0.15s ease-out;
+}
+
+button:active,
+a:active {
+    transform: scale(0.7);
+}
