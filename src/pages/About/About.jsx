@@ -1,6 +1,8 @@
-const About = () => {
-  const splitText = text => {
-    return text.split('').map((char, index) => (
+import React from 'react';
+
+const About: React.FC = () => {
+  const splitText = (text: string): React.ReactElement[] => {
+    return text.split('').map((char: string, index: number) => (
       <span key={index} className="char">
         {char === ' ' ? '\u00A0' : char}
       </span>

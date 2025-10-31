@@ -16,11 +16,11 @@ const Header: React.FC = () => {
   return (
     <header className={`header${scroll ? ' scroll' : ''}`}>
       <div className="logo">
-        <h1>LOGO</h1>
+        <h1 className="hide-text">로고</h1>
       </div>
       <nav className="nav">
         <ul className={`nav-list`}>
-          {['ABOUT NEXON', 'PRODUCTS', 'CAREERS', 'CONTACT'].map((label, index) => (
+          {['ABOUT NEXON', 'PRODUCTS', 'INVESTOR RELATIONS', 'CAREERS', 'CONTACT', 'NEWS'].map((label, index) => (
             <li key={index} className="nav-item">
               <a href="#" className="nav-link">
                 {label}

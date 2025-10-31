@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Main: React.FC = () => {
   const aboutSectionRef = useRef<HTMLElement>(null);
+  const workSectionRef = useRef<HTMLElement>(null);
   const textRefs = useRef<HTMLSpanElement[]>([]);
 
   // 텍스트 분리
@@ -24,10 +25,8 @@ const Main: React.FC = () => {
     ));
   };
 
-  // 소개 애니메이션
   useEffect(() => {
-    if (!aboutSectionRef.current) return;
-
+    // 소개 애니메이션
     gsap.to(textRefs.current, {
       top: 0,
       duration: 0.3,
@@ -35,6 +34,19 @@ const Main: React.FC = () => {
       ease: 'power2.out',
       scrollTrigger: {
         trigger: aboutSectionRef.current,
+        start: 'top 80%',
+        end: 'bottom 20%',
+      },
+    });
+
+    // 작업 섹션 애니메이션
+    gsap.to(workSectionRef.current, {
+      top: 0,
+      duration: 0.3,
+      stagger: 0.025,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: workSectionRef.current,
         start: 'top 80%',
         end: 'bottom 20%',
       },
@@ -73,7 +85,12 @@ const Main: React.FC = () => {
         </div>
       </section>
 
-      {/*  */}
+      {/* 작업 섹션 */}
+      <section className="work-section" ref={workSectionRef}>
+        <div className="work-container">
+          <h2 className="work-title">{splitText('WORK')}</h2>
+        </div>
+      </section>
     </div>
   );
 };
