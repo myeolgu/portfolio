@@ -70,22 +70,42 @@
 // 작업 섹션
 .work-section {
   position: relative;
-  height: 100vh;
-  padding: 0 4rem;
+  height: auto;
+  padding: 0 4rem 16rem;
   max-width: 1440px;
   margin: 0 auto;
 
-  .work-title {
-    color: #ffffff;
-    font-size: 10rem;
-    text-align: left;
-    margin-top: 20rem;
-    font-weight: 700;
+
+
+  .work-container {
     overflow: hidden;
 
-    span {
-      position: relative;
-      top: 10rem;
+    .work-title {
+      color: #ffffff;
+      font-size: 10rem;
+      text-align: center;
+      margin-top: 20rem;
+      font-weight: 700;
+      overflow: hidden;
+
+      span {
+        position: relative;
+        top: 10rem;
+      }
+    }
+
+    .work-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 6rem;
+
+      li {
+        width: calc((100% - 6rem) / 4); // 4개씩 한 줄, gap 2rem * 3
+        height: 30rem;
+        border-radius: 0.8rem;
+        background-color: red;
+      }
     }
   }
 }

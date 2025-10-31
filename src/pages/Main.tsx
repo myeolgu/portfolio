@@ -7,49 +7,43 @@ gsap.registerPlugin(ScrollTrigger);
 const Main: React.FC = () => {
   const aboutSectionRef = useRef<HTMLElement>(null);
   const workSectionRef = useRef<HTMLElement>(null);
-  const textRefs = useRef<HTMLSpanElement[]>([]);
+  const textRefs = useRef<HTMLSpanElement[][]>([]);
 
   // 텍스트 분리
   const splitText = (text: string): React.ReactElement[] => {
-    return text.split('').map((char: string, index: number) => (
+    const spanGroup: HTMLSpanElement[] = [];
+    const elements = text.split('').map((char: string, index: number) => (
       <span
         key={index}
         ref={el => {
-          if (el && !textRefs.current.includes(el)) {
-            textRefs.current.push(el);
+          if (el) {
+            spanGroup.push(el);
           }
         }}
       >
         {char === ' ' ? '\u00A0' : char}
       </span>
     ));
+    textRefs.current.push(spanGroup);
+    return elements;
   };
 
   useEffect(() => {
-    // 소개 애니메이션
-    gsap.to(textRefs.current, {
-      top: 0,
-      duration: 0.3,
-      stagger: 0.025,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: aboutSectionRef.current,
-        start: 'top 80%',
-        end: 'bottom 20%',
-      },
-    });
-
-    // 작업 섹션 애니메이션
-    gsap.to(workSectionRef.current, {
-      top: 0,
-      duration: 0.3,
-      stagger: 0.025,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: workSectionRef.current,
-        start: 'top 80%',
-        end: 'bottom 20%',
-      },
+    // 각 텍스트 그룹별로 ScrollTrigger 개별 적용
+    const endSettings = ['bottom 80%', 'bottom 70%', 'bottom 60%'];
+    textRefs.current.forEach((group, idx) => {
+      gsap.to(group, {
+        top: 0,
+        duration: 0.3,
+        stagger: 0.025,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: group[0],
+          start: 'top 100%',
+          end: endSettings[idx] || 'bottom 80%',
+          scrub: 0.5,
+        },
+      });
     });
 
     // 클린업 함수
@@ -88,9 +82,22 @@ const Main: React.FC = () => {
       {/* 작업 섹션 */}
       <section className="work-section" ref={workSectionRef}>
         <div className="work-container">
-          <h2 className="work-title">{splitText('WORK')}</h2>
+          <h2 className="work-title">{splitText('NEWS')}</h2>
+
+          <ul className="work-list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
         </div>
       </section>
+
+      <section className="contact-section"></section>
     </div>
   );
 };
