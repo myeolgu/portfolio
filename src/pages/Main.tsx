@@ -1,6 +1,8 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import React, { useEffect, useRef } from 'react';
+import { useModal } from '../context/ModalContext';
+import { projects } from '../data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,6 +10,7 @@ const Main: React.FC = () => {
   const aboutSectionRef = useRef<HTMLElement>(null);
   const workSectionRef = useRef<HTMLElement>(null);
   const textRefs = useRef<HTMLSpanElement[][]>([]);
+  const { openModal } = useModal();
 
   // 텍스트 분리
   const splitText = (text: string): React.ReactElement[] => {
@@ -85,14 +88,13 @@ const Main: React.FC = () => {
           <h2 className="work-title">{splitText('NEWS')}</h2>
 
           <ul className="work-list">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            {projects.map(project => (
+              <li key={project.id} onClick={() => openModal(project)}>
+                <div className="work-item">
+                  <h3>{project.title}</h3>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </section>

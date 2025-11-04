@@ -2,6 +2,7 @@ import Lenis from 'lenis';
 import React, { useEffect } from 'react';
 import Footer from './Footer';
 import Header from './Header';
+import Modal from './Modal';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -29,6 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Header />
       <main className="main">{children}</main>
       <Footer />
+      <Modal />
     </>
   );
 };
