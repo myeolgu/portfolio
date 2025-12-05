@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useModal } from '../../context/ModalContext';
+import { useModalStore } from '../../store/modalStore';
 
 const Modal: React.FC = () => {
-  const { isOpen, selectedProject, closeModal } = useModal();
+  const { isOpen, selectedProject, closeModal } = useModalStore();
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {

@@ -1,4 +1,4 @@
-import { Project } from '../context/ModalContext';
+import { Project } from '../store/modalStore';
 
 export const projects: Project[] = [
   {

@@ -1,16 +1,15 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import React, { useEffect, useRef } from 'react';
-import { useModal } from '../context/ModalContext';
+import { useModalStore } from '../store/modalStore';
 import { projects } from '../data/projects';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Main: React.FC = () => {
-  const aboutSectionRef = useRef<HTMLElement>(null);
-  const workSectionRef = useRef<HTMLElement>(null);
   const textRefs = useRef<HTMLSpanElement[][]>([]);
-  const { openModal } = useModal();
+  const { openModal } = useModalStore();
 
   // 텍스트 분리
   const splitText = (text: string): React.ReactElement[] => {
@@ -33,12 +32,13 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     // 각 텍스트 그룹별로 ScrollTrigger 개별 적용
-    const endSettings = ['bottom 80%', 'bottom 70%', 'bottom 60%'];
+    const endSettings = ['bottom 100%', 'bottom 100%', 'bottom 100%'];
+
     textRefs.current.forEach((group, idx) => {
       gsap.to(group, {
         top: 0,
-        duration: 0.3,
-        stagger: 0.025,
+        duration: 1,
+        stagger: 0.3,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: group[0],
@@ -65,25 +65,28 @@ const Main: React.FC = () => {
       </section>
 
       {/* 소개 섹션 */}
-      <section className="about-section" ref={aboutSectionRef}>
+      <section className="about-section">
         <div className="about-container">
           <div className="about-text">
-            <p className="text">{splitText('DREAMERS')}</p>
-            <p className="text">{splitText('PIONEERS')}</p>
-            <p className="text">{splitText('INNOVATORS')}</p>
+            <p className="text">{splitText('IMPLEMENTERS')}</p>
+            <p className="text">{splitText('ARCHITECTS')}</p>
+            <p className="text">{splitText('OPTIMIZERS')}</p>
           </div>
 
           <div className="about-description">
-            Nexon is a leader in global entertainment with a portfolio of successful game franchises enjoyed by hundreds of millions of people around the world. Nexon has more than 40 live games in
-            operation in more than 190 countries, available on PC, console and mobile. Nexon has more than ten intellectual properties including MapleStory, Mabinogi, and Dungeon&amp;Fighter supported
-            by best-in-class Live Operations which keeps the games balanced, and refreshed with new content and experiences. Spanning multiple generations, Nexon games are enjoyed for decades by
-            players all over the world.
+            I am a key implementer in web architecture, contributing to a portfolio of successful
+             digital structures enjoyed by hundreds of millions of users around 
+             the world. I have optimized front-end architectures for over 40 
+             live digital projects in operation, ensuring availability 
+             across desktop, tablet, and mobile interfaces in complex global 
+             environments. I actively specialize in integrating major content 
+             streams for more than ten critical services, supported by strong knowledge of Live Architecture Principles which keeps interfaces compliant, and refreshed with new content and enhanced user experiences. Spanning multiple platforms, my commitment to web standards and robust code contributes to stability for both developers and users alike.
           </div>
         </div>
       </section>
 
       {/* 작업 섹션 */}
-      <section className="work-section" ref={workSectionRef}>
+      <section className="work-section">
         <div className="work-container">
           <h2 className="work-title">{splitText('NEWS')}</h2>
 
@@ -99,7 +102,20 @@ const Main: React.FC = () => {
         </div>
       </section>
 
-      <section className="contact-section"></section>
+      <section className="contact-section">
+        <div className="contact-container">
+          <h2 className="contact-title">{splitText('CONTACT')}</h2>
+
+          <div className="contact-info">
+            <p>Email: contact@nexon.com</p>
+            
+            <ul className="contact-list">
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
