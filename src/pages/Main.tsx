@@ -44,7 +44,7 @@ const Main: React.FC = () => {
           trigger: group[0],
           start: 'top 100%',
           end: endSettings[idx] || 'bottom 80%',
-          scrub: 0.5,
+          scrub: 0.5,      
         },
       });
     });
