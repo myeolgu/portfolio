@@ -65,7 +65,7 @@ const Main: React.FC = () => {
       </section>
 
       {/* 소개 섹션 */}
-      <section className="about-section">
+      <section id="about" className="about-section">
         <div className="about-container">
           <div className="about-text">
             <p className="text">{splitText('IMPLEMENTERS')}</p>
@@ -86,7 +86,7 @@ const Main: React.FC = () => {
       </section>
 
       {/* 작업 섹션 */}
-      <section className="work-section">
+      <section id="news" className="work-section">
         <div className="work-container">
           <h2 className="work-title">{splitText('NEWS')}</h2>
 
@@ -102,17 +102,14 @@ const Main: React.FC = () => {
         </div>
       </section>
 
-      <section className="contact-section">
+      <section id="contact" className="contact-section">
         <div className="contact-container">
-          <h2 className="contact-title">{splitText('CONTACT')}</h2>
+          <h2 className="contact-title">{splitText('함께 일할 웹 퍼블리셔를 찾고 계신가요?')}</h2>
 
           <div className="contact-info">
-            <p>Email: contact@nexon.com</p>
-            
-            <ul className="contact-list">
-              <li></li>
-              <li></li>
-            </ul>
+            <p className="contact-email">Email : juyeop198@naver.com</p>
+
+            <p className="contact-phone">Tel: 010-5917-7297</p>
           </div>
         </div>
       </section>
