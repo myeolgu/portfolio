@@ -378,7 +378,7 @@ const Main: React.FC = () => {
       </section>
 
       {/* 소개 섹션 */}
-      <section id="about" className="panel about-section" aria-label="소개">
+      <section className="panel about-section" aria-label="소개">
         <div className="about-container">
           <h2 className="about-text">
             <span className="text">{splitText('디테일한 마크업 위에')}</span>
@@ -386,15 +386,15 @@ const Main: React.FC = () => {
             <span className="text">{splitText('퍼블리셔')}</span>
           </h2>
 
-          <div className="about-description">
+          <p className="about-description">
             3년간 웹 에이전시에서 다양한 클라이언트 프로젝트를 경험하며 정확한 마크업과 크로스브라우징, 반응형 구현에 대한 실무 감각을 쌓아왔습니다. 디자인 시안을 픽셀 단위로 구현하는 것에서 나아가, 사용자가 실제로 편하게 느끼는 UI를 만드는 데 관심을 두고 있습니다.
 현재는 JavaScript와 React를 학습하며 퍼블리싱의 영역을 넓혀가고 있습니다. 탄탄한 CSS 기반 위에 컴포넌트 설계와 상태 관리 역량을 더해, 설계부터 구현까지 아우르는 개발자로 성장하고자 합니다.
-          </div>
+          </p>
         </div>
       </section>
 
       {/* 작업 섹션 */}
-      <section id="news" className="panel work-section" aria-label="프로젝트">
+      <section className="panel work-section" aria-label="프로젝트">
         <div className="work-container">
           {/* 왼쪽: 이미지 슬라이더 영역 */}
           <div
@@ -481,7 +481,7 @@ const Main: React.FC = () => {
       </section>
 
       {/* 연락처 섹션 */}
-      <section id="contact" className="panel contact-section" aria-label="연락처">
+      <section className="panel contact-section" aria-label="연락처">
         <div className="contact-container">
           <h2 className="contact-title">{splitText('함께 일할 웹 퍼블리셔를 찾고 계신가요?')}</h2>
 
