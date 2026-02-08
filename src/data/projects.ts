@@ -1,8 +1,8 @@
 import { Project } from '../store/modalStore';
 
 // 이미지 import
-import lgchemImg from '../assets/images/projects/lgchem.svg';
-import lotteImg from '../assets/images/projects/lotte.png';
+import lgchemImg from '../assets/videos/lg_intro.mp4';
+import lotteImg from '../assets/videos/lotte_intro.mp4';
 import samsungImg from '../assets/images/projects/samsung.png';
 import damdiImg from '../assets/images/projects/daddl.jpg';
 import sonoImg from '../assets/images/projects/sono.jpg';

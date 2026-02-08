@@ -6,11 +6,14 @@ import { projects } from '../data/projects';
 const Main: React.FC = () => {
   const textRefs = useRef<HTMLSpanElement[][]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const workListRef = useRef<HTMLUListElement>(null);
   const animatedSections = useRef<Set<number>>(new Set());
-  const { openModal, isOpen: isModalOpen } = useModalStore();
+  const { isOpen: isModalOpen } = useModalStore();
   const [currentSection, setCurrentSection] = useState(0);
+  const [currentProject, setCurrentProject] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const isAnimating = useRef(false);
+  const totalProjects = projects.length;
 
   // 리사이즈 이벤트로 화면 크기 추적
   useEffect(() => {
@@ -78,6 +81,23 @@ const Main: React.FC = () => {
     });
   };
 
+  // 프로젝트 가로 스크롤 함수
+  const goToProject = (index: number) => {
+    if (index < 0 || index >= totalProjects || isAnimating.current) return;
+
+    isAnimating.current = true;
+    setCurrentProject(index);
+
+    gsap.to(workListRef.current, {
+      x: -index * window.innerWidth,
+      duration: 0.8,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        isAnimating.current = false;
+      },
+    });
+  };
+
   useEffect(() => {
     // GSAP ScrollTo 플러그인 동적 로드
     import('gsap/ScrollToPlugin').then(({ ScrollToPlugin }) => {
@@ -95,6 +115,28 @@ const Main: React.FC = () => {
 
       if (isAnimating.current) return;
 
+      // 프로젝트 섹션 (섹션 2)에서 가로 스크롤 처리
+      if (currentSection === 2) {
+        if (e.deltaY > 0) {
+          // 아래로 스크롤 → 다음 프로젝트
+          if (currentProject < totalProjects - 1) {
+            goToProject(currentProject + 1);
+          } else {
+            // 마지막 프로젝트에서 다음 섹션으로
+            goToSection(currentSection + 1);
+          }
+        } else if (e.deltaY < 0) {
+          // 위로 스크롤 → 이전 프로젝트
+          if (currentProject > 0) {
+            goToProject(currentProject - 1);
+          } else {
+            // 첫 프로젝트에서 이전 섹션으로
+            goToSection(currentSection - 1);
+          }
+        }
+        return;
+      }
+
       if (e.deltaY > 0 && currentSection < totalSections - 1) {
         // 아래로 스크롤
         goToSection(currentSection + 1);
@@ -108,6 +150,26 @@ const Main: React.FC = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isMobile || isModalOpen || isAnimating.current) return;
 
+      // 프로젝트 섹션에서 가로 스크롤
+      if (currentSection === 2) {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (currentProject < totalProjects - 1) {
+            goToProject(currentProject + 1);
+          } else {
+            goToSection(currentSection + 1);
+          }
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if (currentProject > 0) {
+            goToProject(currentProject - 1);
+          } else {
+            goToSection(currentSection - 1);
+          }
+        }
+        return;
+      }
+
       if ((e.key === 'ArrowDown' || e.key === 'PageDown') && currentSection < totalSections - 1) {
         e.preventDefault();
         goToSection(currentSection + 1);
@@ -119,19 +181,51 @@ const Main: React.FC = () => {
 
     // 터치 이벤트 (모바일)
     let touchStartY = 0;
+    let touchStartX = 0;
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
       if (isModalOpen || isAnimating.current) return;
 
       const touchEndY = e.changedTouches[0].clientY;
-      const diff = touchStartY - touchEndY;
+      const touchEndX = e.changedTouches[0].clientX;
+      const diffY = touchStartY - touchEndY;
+      const diffX = touchStartX - touchEndX;
 
-      if (diff > 50 && currentSection < totalSections - 1) {
+      // 프로젝트 섹션에서 가로 스와이프 처리
+      if (currentSection === 2) {
+        // 가로 스와이프가 더 강하면 프로젝트 이동
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+          if (diffX > 0 && currentProject < totalProjects - 1) {
+            goToProject(currentProject + 1);
+          } else if (diffX < 0 && currentProject > 0) {
+            goToProject(currentProject - 1);
+          }
+          return;
+        }
+        // 세로 스와이프
+        if (diffY > 50) {
+          if (currentProject < totalProjects - 1) {
+            goToProject(currentProject + 1);
+          } else {
+            goToSection(currentSection + 1);
+          }
+        } else if (diffY < -50) {
+          if (currentProject > 0) {
+            goToProject(currentProject - 1);
+          } else {
+            goToSection(currentSection - 1);
+          }
+        }
+        return;
+      }
+
+      if (diffY > 50 && currentSection < totalSections - 1) {
         goToSection(currentSection + 1);
-      } else if (diff < -50 && currentSection > 0) {
+      } else if (diffY < -50 && currentSection > 0) {
         goToSection(currentSection - 1);
       }
     };
@@ -148,7 +242,7 @@ const Main: React.FC = () => {
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [currentSection, isModalOpen, isMobile]);
+  }, [currentSection, currentProject, isModalOpen, isMobile]);
 
   // 섹션 변경 시 텍스트 애니메이션
   useEffect(() => {
@@ -227,32 +321,60 @@ const Main: React.FC = () => {
         <div className="work-container">
           <h2 className="work-title">{splitText('Projects')}</h2>
 
-          <ul className="work-list" role="list">
+          <ul className="work-list" role="list" ref={workListRef}>
             {projects.map(project => (
-              <li key={project.id}>
-                <button
-                  type="button"
-                  className="work-item"
-                  style={{ background: project.background || '#1a1a1a' }}
-                  onClick={() => openModal(project)}
-                  aria-label={`${project.title} 프로젝트 상세보기`}
-                >
+              <li key={project.id} className="work-slide">
+                {/* 왼쪽: 미디어 영역 */}
+                <div className="work-image-area">
                   {project.image && (
-                    <img
-                      src={project.image}
-                      alt=""
-                      className="work-thumbnail"
-                      style={{ height: project.thumbnailHeight || '4rem' }}
-                      aria-hidden="true"
-                    />
+                    project.image.endsWith('.mp4') ? (
+                      <video
+                        src={project.image}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="work-thumbnail"
+                      />
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="work-thumbnail"
+                      />
+                    )
                   )}
-                  <div className="work-info">
-                    <h3>{project.title}</h3>
+                </div>
+
+                {/* 오른쪽: 정보 영역 */}
+                <div className="work-info-area">
+                  <h3 className="work-project-title">{project.title}</h3>
+                  <div className="work-description-box">
+                    <p>{project.description}</p>
                   </div>
-                </button>
+                  {project.tech && project.tech.length > 0 && (
+                    <ul className="work-tech-list">
+                      {project.tech.map((tech, index) => (
+                        <li key={index}>{tech}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="work-link"
+                    >
+                      사이트 바로가기
+                      <i className="ico ico-arrow" aria-hidden="true"></i>
+                    </a>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
+
         </div>
       </section>
 
