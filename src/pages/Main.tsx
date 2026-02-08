@@ -388,7 +388,7 @@ const Main: React.FC = () => {
 
           <div className="about-description">
             3년간 웹 에이전시에서 다양한 클라이언트 프로젝트를 경험하며 정확한 마크업과 크로스브라우징, 반응형 구현에 대한 실무 감각을 쌓아왔습니다. 디자인 시안을 픽셀 단위로 구현하는 것에서 나아가, 사용자가 실제로 편하게 느끼는 UI를 만드는 데 관심을 두고 있습니다.
-현재는 JavaScript와 React를 학습하며 퍼블리셔에서 프론트엔드 개발자로의 전환을 준비하고 있습니다. 탄탄한 CSS 기반 위에 컴포넌트 설계와 상태 관리 역량을 더해, 설계부터 구현까지 아우르는 개발자로 성장하고자 합니다.
+현재는 JavaScript와 React를 학습하며 퍼블리싱의 영역을 넓혀가고 있습니다. 탄탄한 CSS 기반 위에 컴포넌트 설계와 상태 관리 역량을 더해, 설계부터 구현까지 아우르는 개발자로 성장하고자 합니다.
           </div>
         </div>
       </section>
@@ -485,11 +485,14 @@ const Main: React.FC = () => {
         <div className="contact-container">
           <h2 className="contact-title">{splitText('함께 일할 웹 퍼블리셔를 찾고 계신가요?')}</h2>
 
-          <div className="contact-info">
-            <p className="contact-email">Email : juyeop198@naver.com</p>
-
-            <p className="contact-phone">Tel: 010-5917-7297</p>
-          </div>
+          <address className="contact-info">
+            <a href="mailto:juyeop198@naver.com" className="contact-email">
+              Email : juyeop198@naver.com
+            </a>
+            <a href="tel:010-5917-7297" className="contact-phone">
+              Tel : 010-5917-7297
+            </a>
+          </address>
         </div>
       </section>
     </div>
