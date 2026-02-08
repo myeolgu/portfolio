@@ -1,15 +1,44 @@
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useModalStore } from '../store/modalStore';
 import { projects } from '../data/projects';
 
-
-gsap.registerPlugin(ScrollTrigger);
-
 const Main: React.FC = () => {
   const textRefs = useRef<HTMLSpanElement[][]>([]);
-  const { openModal } = useModalStore();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const animatedSections = useRef<Set<number>>(new Set());
+  const { openModal, isOpen: isModalOpen } = useModalStore();
+  const [currentSection, setCurrentSection] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const isAnimating = useRef(false);
+
+  // 리사이즈 이벤트로 화면 크기 추적
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // 영상 14초부터 시작
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleLoadedMetadata = () => {
+        video.currentTime = 15;
+      };
+      video.addEventListener('loadedmetadata', handleLoadedMetadata);
+      // 이미 로드된 경우
+      if (video.readyState >= 1) {
+        video.currentTime = 15;
+      }
+      return () => {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      };
+    }
+  }, []);
 
   // 텍스트 분리
   const splitText = (text: string): React.ReactElement[] => {
@@ -17,6 +46,7 @@ const Main: React.FC = () => {
     const elements = text.split('').map((char: string, index: number) => (
       <span
         key={index}
+        className="split-char"
         ref={el => {
           if (el) {
             spanGroup.push(el);
@@ -30,79 +60,204 @@ const Main: React.FC = () => {
     return elements;
   };
 
-  useEffect(() => {
-    // 각 텍스트 그룹별로 ScrollTrigger 개별 적용
-    const endSettings = ['bottom 100%', 'bottom 100%', 'bottom 100%'];
+  // 섹션 이동 함수
+  const goToSection = (index: number) => {
+    const sections = document.querySelectorAll('.panel');
+    if (index < 0 || index >= sections.length || isAnimating.current) return;
 
-    textRefs.current.forEach((group, idx) => {
-      gsap.to(group, {
-        top: 0,
-        duration: 1,
-        stagger: 0.3,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: group[0],
-          start: 'top 100%',
-          end: endSettings[idx] || 'bottom 80%',
-          scrub: 0.5,      
-        },
-      });
+    isAnimating.current = true;
+    setCurrentSection(index);
+
+    gsap.to(window, {
+      scrollTo: { y: sections[index], autoKill: false },
+      duration: 0.8,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        isAnimating.current = false;
+      },
     });
+  };
+
+  useEffect(() => {
+    // GSAP ScrollTo 플러그인 동적 로드
+    import('gsap/ScrollToPlugin').then(({ ScrollToPlugin }) => {
+      gsap.registerPlugin(ScrollToPlugin);
+    });
+
+    const sections = document.querySelectorAll('.panel');
+    const totalSections = sections.length;
+
+    // 휠 이벤트 핸들러 (768px 초과에서만 동작)
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault(); // 768px 이하에서도 휠 스크롤 완전 차단
+
+      if (isMobile || isModalOpen) return;
+
+      if (isAnimating.current) return;
+
+      if (e.deltaY > 0 && currentSection < totalSections - 1) {
+        // 아래로 스크롤
+        goToSection(currentSection + 1);
+      } else if (e.deltaY < 0 && currentSection > 0) {
+        // 위로 스크롤
+        goToSection(currentSection - 1);
+      }
+    };
+
+    // 키보드 이벤트 핸들러 (768px 초과에서만 동작)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isMobile || isModalOpen || isAnimating.current) return;
+
+      if ((e.key === 'ArrowDown' || e.key === 'PageDown') && currentSection < totalSections - 1) {
+        e.preventDefault();
+        goToSection(currentSection + 1);
+      } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentSection > 0) {
+        e.preventDefault();
+        goToSection(currentSection - 1);
+      }
+    };
+
+    // 터치 이벤트 (모바일)
+    let touchStartY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (isModalOpen || isAnimating.current) return;
+
+      const touchEndY = e.changedTouches[0].clientY;
+      const diff = touchStartY - touchEndY;
+
+      if (diff > 50 && currentSection < totalSections - 1) {
+        goToSection(currentSection + 1);
+      } else if (diff < -50 && currentSection > 0) {
+        goToSection(currentSection - 1);
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     // 클린업 함수
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, []);
+  }, [currentSection, isModalOpen, isMobile]);
+
+  // 섹션 변경 시 텍스트 애니메이션
+  useEffect(() => {
+    // 섹션별 텍스트 그룹 매핑 (섹션 1: 0-2, 섹션 2: 3, 섹션 3: 4)
+    const sectionTextMap: { [key: number]: number[] } = {
+      1: [0, 1, 2], // about 섹션의 3줄
+      2: [3],       // work 섹션 타이틀
+      3: [4],       // contact 섹션 타이틀
+    };
+
+    const groupIndices = sectionTextMap[currentSection];
+    if (!groupIndices || animatedSections.current.has(currentSection)) return;
+
+    animatedSections.current.add(currentSection);
+
+    groupIndices.forEach((index) => {
+      const group = textRefs.current[index];
+      if (!group || group.length === 0) return;
+
+      gsap.set(group, {
+        y: 120,
+        opacity: 0,
+        rotateX: -90,
+      });
+
+      gsap.to(group, {
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        duration: 1.2,
+        stagger: {
+          each: 0.03,
+          from: 'start',
+        },
+        ease: 'power4.out',
+        delay: 0.3,
+      });
+    });
+  }, [currentSection]);
 
   return (
     <div className="wrap">
       {/* 인트로 섹션 */}
-      <section className="intro-section">
-        <video autoPlay loop muted playsInline className="about-video">
+      <section className="panel intro-section">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="about-video"
+          aria-label="배경 영상"
+        >
           <source src={require('../assets/videos/video.mp4')} type="video/mp4" />
         </video>
       </section>
 
       {/* 소개 섹션 */}
-      <section id="about" className="about-section">
+      <section id="about" className="panel about-section" aria-label="소개">
         <div className="about-container">
           <div className="about-text">
-            <p className="text">{splitText('IMPLEMENTERS')}</p>
-            <p className="text">{splitText('ARCHITECTS')}</p>
-            <p className="text">{splitText('OPTIMIZERS')}</p>
+            <p className="text">{splitText('디테일한 마크업 위에')}</p>
+            <p className="text">{splitText('인터랙션을 더하는')}</p>
+            <p className="text">{splitText('퍼블리셔')}</p>
           </div>
 
           <div className="about-description">
-            I am a key implementer in web architecture, contributing to a portfolio of successful
-             digital structures enjoyed by hundreds of millions of users around 
-             the world. I have optimized front-end architectures for over 40 
-             live digital projects in operation, ensuring availability 
-             across desktop, tablet, and mobile interfaces in complex global 
-             environments. I actively specialize in integrating major content 
-             streams for more than ten critical services, supported by strong knowledge of Live Architecture Principles which keeps interfaces compliant, and refreshed with new content and enhanced user experiences. Spanning multiple platforms, my commitment to web standards and robust code contributes to stability for both developers and users alike.
+            3년간 웹 에이전시에서 다양한 클라이언트 프로젝트를 경험하며 정확한 마크업과 크로스브라우징, 반응형 구현에 대한 실무 감각을 쌓아왔습니다. 디자인 시안을 픽셀 단위로 구현하는 것에서 나아가, 사용자가 실제로 편하게 느끼는 UI를 만드는 데 관심을 두고 있습니다.
+현재는 JavaScript와 React를 학습하며 퍼블리셔에서 프론트엔드 개발자로의 전환을 준비하고 있습니다. 탄탄한 CSS 기반 위에 컴포넌트 설계와 상태 관리 역량을 더해, 설계부터 구현까지 아우르는 개발자로 성장하고자 합니다.
           </div>
         </div>
       </section>
 
       {/* 작업 섹션 */}
-      <section id="news" className="work-section">
+      <section id="news" className="panel work-section" aria-label="프로젝트">
         <div className="work-container">
-          <h2 className="work-title">{splitText('NEWS')}</h2>
+          <h2 className="work-title">{splitText('Projects')}</h2>
 
-          <ul className="work-list">
+          <ul className="work-list" role="list">
             {projects.map(project => (
-              <li key={project.id} onClick={() => openModal(project)}>
-                <div className="work-item">
-                  <h3>{project.title}</h3>
-                </div>
+              <li key={project.id}>
+                <button
+                  type="button"
+                  className="work-item"
+                  style={{ background: project.background || '#1a1a1a' }}
+                  onClick={() => openModal(project)}
+                  aria-label={`${project.title} 프로젝트 상세보기`}
+                >
+                  {project.image && (
+                    <img
+                      src={project.image}
+                      alt=""
+                      className="work-thumbnail"
+                      style={{ height: project.thumbnailHeight || '4rem' }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <div className="work-info">
+                    <h3>{project.title}</h3>
+                  </div>
+                </button>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section id="contact" className="contact-section">
+      {/* 연락처 섹션 */}
+      <section id="contact" className="panel contact-section" aria-label="연락처">
         <div className="contact-container">
           <h2 className="contact-title">{splitText('함께 일할 웹 퍼블리셔를 찾고 계신가요?')}</h2>
 

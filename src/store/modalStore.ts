@@ -8,6 +8,8 @@ export interface Project {
   title: string;           // 프로젝트 제목
   description: string;     // 프로젝트 설명
   image?: string;          // 프로젝트 이미지 URL (선택적)
+  background?: string;     // 프로젝트 배경 색상/그라데이션 (선택적)
+  thumbnailHeight?: string; // 썸네일 높이 (선택적)
   tech?: string[];         // 사용된 기술 스택 배열 (선택적)
   link?: string;           // 프로젝트 링크 (선택적)
 }

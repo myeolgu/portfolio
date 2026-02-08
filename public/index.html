@@ -4,11 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>웹 사이트</title>
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO 기본 메타 태그 -->
+    <title>주엽 | 웹 퍼블리셔 포트폴리오</title>
+    <meta name="description" content="디테일한 마크업 위에 인터랙션을 더하는 웹 퍼블리셔입니다. 3년간의 웹 에이전시 경험을 바탕으로 정확한 마크업, 크로스브라우징, 반응형 구현을 전문으로 합니다.">
+    <meta name="keywords" content="웹퍼블리셔, 프론트엔드, 포트폴리오, HTML, CSS, JavaScript, React, GSAP, 반응형웹">
+    <meta name="author" content="주엽">
+    <!-- 포폴용이라 검색엔진 노출 금지 -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Open Graph (Facebook, LinkedIn 등) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="주엽 | 웹 퍼블리셔 포트폴리오">
+    <meta property="og:description" content="디테일한 마크업 위에 인터랙션을 더하는 웹 퍼블리셔입니다.">
+    <meta property="og:url" content="https://juyeop198.github.io/portfolio/">
+    <meta property="og:site_name" content="주엽 포트폴리오">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="주엽 | 웹 퍼블리셔 포트폴리오">
+    <meta name="twitter:description" content="디테일한 마크업 위에 인터랙션을 더하는 웹 퍼블리셔입니다.">
+
+    <!-- 모바일 최적화 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://juyeop198.github.io/portfolio/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6N91MEMZD6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6N91MEMZD6');
+    </script>
 </head>
 
 <body>
+    <!-- 스킵 네비게이션 (접근성) -->
+    <a href="#about" class="skip-nav">본문 바로가기</a>
     <div class="wrap" id="wrap"></div>
 </body>
 

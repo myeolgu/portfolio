@@ -1,0 +1,104 @@
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: all;
+
+    &.animating {
+        pointer-events: none;
+    }
+}
+
+.intro-door {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #0a0a0a;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 1px;
+        height: 100%;
+
+    }
+}
+
+.intro-door-left {
+    left: 0;
+
+    &::before {
+        right: 0;
+    }
+}
+
+.intro-door-right {
+    right: 0;
+
+    &::before {
+        left: 0;
+    }
+}
+
+.intro-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
+.intro-progress {
+    width: 0;
+    height: 100%;
+    background: #ffffff;
+}
+
+.intro-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.intro-greeting {
+    color: #ffffff;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+
+    @media (max-width: 768px) {
+        font-size: 1.8rem;
+    }
+}
+
+.intro-ju {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    margin-top: 4rem;
+
+    @media (max-width: 768px) {
+        font-size: 4rem;
+    }
+}
+

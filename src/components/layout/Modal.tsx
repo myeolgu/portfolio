@@ -9,19 +9,29 @@ const Modal: React.FC = () => {
       if (e.key === 'Escape') closeModal();
     };
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleEsc);
     }
-    return () => window.removeEventListener('keydown', handleEsc);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleEsc);
+    };
   }, [isOpen, closeModal]);
 
   if (!isOpen || !selectedProject) return null;
 
   return (
-    <div className="modal-overlay" onClick={closeModal}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
+    <div className="modal-overlay" onClick={closeModal} role="presentation">
+      <div
+        className="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onClick={e => e.stopPropagation()}
+      >
         <div className="modal-header">
-          <h2>{selectedProject.title}</h2>
-          <button className="modal-close" onClick={closeModal}>
+          <h2 id="modal-title">{selectedProject.title}</h2>
+          <button className="modal-close" onClick={closeModal} aria-label="닫기">
             ✕
           </button>
         </div>
@@ -37,7 +47,12 @@ const Modal: React.FC = () => {
               </ul>
             </div>
           )}
-          {selectedProject.link && <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="modal-link"></a>}
+          {selectedProject.link && (
+            <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="modal-link">
+              링크
+              <i className="ico ico-arrow" aria-hidden="true"></i>
+            </a>
+          )}
         </div>
       </div>
     </div>
