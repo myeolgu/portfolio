@@ -7,11 +7,12 @@ const Main: React.FC = () => {
   const textRefs = useRef<HTMLSpanElement[][]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const workListRef = useRef<HTMLDivElement>(null);
+  const workImageAreaRef = useRef<HTMLDivElement>(null);
   const animatedSections = useRef<Set<number>>(new Set());
   const { isOpen: isModalOpen } = useModalStore();
   const [currentSection, setCurrentSection] = useState(0);
   const [currentProject, setCurrentProject] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1023);
   const isAnimating = useRef(false);
   const totalProjects = projects.length;
 
@@ -27,7 +28,7 @@ const Main: React.FC = () => {
   // 리사이즈 이벤트로 화면 크기 추적
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 1023);
     };
 
     window.addEventListener('resize', handleResize);
@@ -195,12 +196,18 @@ const Main: React.FC = () => {
       }
     };
 
-    // 터치 이벤트 (모바일)
+    // 터치 이벤트 (모바일 풀페이지)
     let touchStartY = 0;
     let touchStartX = 0;
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY;
       touchStartX = e.touches[0].clientX;
+    };
+
+    // 터치 이동 중 기본 스크롤 차단 (풀페이지 효과 유지)
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isModalOpen) return;
+      e.preventDefault();
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
@@ -249,6 +256,7 @@ const Main: React.FC = () => {
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     // 클린업 함수
@@ -256,9 +264,62 @@ const Main: React.FC = () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
     };
   }, [currentSection, currentProject, isModalOpen, isMobile]);
+
+  // 모바일 작업 영역 스와이프 이벤트
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const workImageArea = workImageAreaRef.current;
+    if (!workImageArea) return;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (isAnimating.current) return;
+
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+
+      // 가로 스와이프
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX > 0 && currentProject < totalProjects - 1) {
+          goToProject(currentProject + 1);
+        } else if (diffX < 0 && currentProject > 0) {
+          goToProject(currentProject - 1);
+        }
+      }
+      // 세로 스와이프 (PC처럼 아래로 내리면 다음, 위로 올리면 이전)
+      else if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > 50) {
+        if (diffY > 0 && currentProject < totalProjects - 1) {
+          // 위로 스와이프 (손가락 아래→위) = 다음 프로젝트
+          goToProject(currentProject + 1);
+        } else if (diffY < 0 && currentProject > 0) {
+          // 아래로 스와이프 (손가락 위→아래) = 이전 프로젝트
+          goToProject(currentProject - 1);
+        }
+      }
+    };
+
+    workImageArea.addEventListener('touchstart', handleTouchStart, { passive: true });
+    workImageArea.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      workImageArea.removeEventListener('touchstart', handleTouchStart);
+      workImageArea.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, currentProject, totalProjects]);
 
   // 섹션 변경 시 텍스트 애니메이션
   useEffect(() => {
@@ -336,7 +397,7 @@ const Main: React.FC = () => {
       <section id="news" className="panel work-section" aria-label="프로젝트">
         <div className="work-container">
           {/* 왼쪽: 이미지 슬라이더 영역 */}
-          <div className="work-image-area">
+          <div className="work-image-area" ref={workImageAreaRef}>
             <div className="work-image-slider" ref={workListRef}>
               {projects.map(project => (
                 <div key={project.id} className="work-image-slide">

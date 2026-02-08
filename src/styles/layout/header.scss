@@ -1,3 +1,5 @@
+@use '../base/mixin.scss' as *;
+
 header {
   position: fixed;
   display: flex;
@@ -24,6 +26,10 @@ header {
       color: #ffffff;
       font-size: 2.4rem;
       font-weight: 700;
+
+      @include mobile {
+          font-size: 5rem;
+      }
     }
   }
 

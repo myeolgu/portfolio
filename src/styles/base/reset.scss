@@ -29,38 +29,23 @@ body {
     height: 100%;
 }
 
-// rem 코딩일때 화면 리사이즈에 rem 값이 자연스럽게 변하는 미디어 쿼리 분기값 (아래 사이트들 참고)
-// rem 단위를 쓰지 않으면 필요 없는 소스
-// https://css-tricks.com/using-a-mixin-to-take-the-math-out-of-responsive-font-sizes/
-// https://css-tricks.com/snippets/css/fluid-typography/
-
-// 모바일 기본 영역 보다 작은 사이즈 대응 영역
-// @media (max-width: 374px) {
-//     html {
-//         font-size: calc(#{4px} + 6 * ((100vw - 200px) / 400));
-//     }
-// }
-
-// // 모바일 기본 사이즈 대응 영역 (PSD 750 사이즈 기준 세팅)
-// // max-width 에는 PSD 가로 사이즈 적용하기. 그걸 반으로 나눈 것을 min-width 에 적용하기.
-@media (min-width: 300px) and (max-width: 750px) {
+// 360px ~ 1024px: 비례 스케일
+// 1024px에서 10px (10rem = 100px), 360px에서 약 3.5px (10rem ≈ 35px)
+@media (min-width: 360px) and (max-width: 1024px) {
     html {
-        font-size: calc(#{5px} + 5 * ((100vw - 375px) / 375));
+        font-size: calc(100vw / 102.4);
     }
 }
 
-
-// 태블릿 영역 대응 (아이패드 기준 1024 부터 태블릿 영역으로 정의함)
-// pc 컨텐츠 영역 최소 사이즈에 맞춰서 조정이 필요함
-// 예) 컨텐츠 최소 넓이가 1100px 이라고 한다면 max-width를 1100px 로 변경 해야함
-@media (min-width: 1024px) and (max-width: 1440px) {
+// 360px 미만: 최소값 고정
+@media (max-width: 359px) {
     html {
-        font-size: calc(#{7px} + 3 * ((100vw - 1024px) / (1440 - 1024)));
+        font-size: 3.5px;
     }
 }
 
-// PC 영역
-@media (min-width: 1441px) {
+// PC 영역 (1025px 이상): 10px 고정
+@media (min-width: 1025px) {
     html {
         font-size: 10px;
     }
