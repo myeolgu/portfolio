@@ -34,7 +34,7 @@
     align-items: center;
   }
 
-  .about-text { 
+  .about-text {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,8 +43,13 @@
     row-gap: 1.2rem;
     font-weight: 700;
 
+    @media (max-width: 1024px) {
+      font-size: 6rem;
+    }
+
     .text {
       width: 91rem;
+      max-width: 100%;
       display: flex;
       gap: 0.2rem;
       justify-content: center;
@@ -59,6 +64,7 @@
 
   .about-description {
     width: 91rem;
+    max-width: 100%;
     color: #ffffff;
     font-size: 1.8rem;
     text-align: center;
@@ -86,6 +92,11 @@
       font-weight: 700;
       overflow: hidden;
 
+      @media (max-width: 1024px) {
+        font-size: 6rem;
+        margin-top: 10rem;
+      }
+
       span {
         position: relative;
         top: 10rem;
@@ -107,6 +118,11 @@
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow: hidden;
+
+        @media (max-width: 1024px) {
+          width: calc((100% - 2rem) / 2); // 태블릿: 2개씩
+          height: 25rem;
+        }
 
         &:hover {
           transform: translateY(-0.8rem);
@@ -142,19 +158,24 @@
   align-items: center;
   justify-content: center;
 
-   .contact-title {
-      color: #ffffff;
-      font-size: 6rem;
-      text-align: center;
-      margin-top: 20rem;
-      font-weight: 700;
-      overflow: hidden;
+  .contact-title {
+    color: #ffffff;
+    font-size: 6rem;
+    text-align: center;
+    margin-top: 20rem;
+    font-weight: 700;
+    overflow: hidden;
 
-      span {
-        position: relative;
-        top: 10rem;
-      }
+    @media (max-width: 1024px) {
+      font-size: 4rem;
+      margin-top: 10rem;
     }
+
+    span {
+      position: relative;
+      top: 10rem;
+    }
+  }
 
   .contact-container {
     width: 100%;
@@ -175,7 +196,7 @@
     line-height: 1.3;
 
     @media (max-width: 1024px) {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
     }
   }
 
@@ -183,5 +204,9 @@
     color: #999999;
     font-size: 2.4rem;
     font-weight: 400;
+
+    @media (max-width: 1024px) {
+      font-size: 2rem;
+    }
   }
 }
