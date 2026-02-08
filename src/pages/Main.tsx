@@ -6,7 +6,7 @@ import { projects } from '../data/projects';
 const Main: React.FC = () => {
   const textRefs = useRef<HTMLSpanElement[][]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const workListRef = useRef<HTMLUListElement>(null);
+  const workListRef = useRef<HTMLDivElement>(null);
   const animatedSections = useRef<Set<number>>(new Set());
   const { isOpen: isModalOpen } = useModalStore();
   const [currentSection, setCurrentSection] = useState(0);
@@ -14,6 +14,15 @@ const Main: React.FC = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const isAnimating = useRef(false);
   const totalProjects = projects.length;
+
+  // 첫 로딩 시 페이지 상단으로 이동
+  useEffect(() => {
+    // 브라우저 스크롤 복원 비활성화
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   // 리사이즈 이벤트로 화면 크기 추적
   useEffect(() => {
@@ -88,14 +97,21 @@ const Main: React.FC = () => {
     isAnimating.current = true;
     setCurrentProject(index);
 
-    gsap.to(workListRef.current, {
-      x: -index * window.innerWidth,
-      duration: 0.8,
-      ease: 'power2.inOut',
-      onComplete: () => {
-        isAnimating.current = false;
-      },
-    });
+    // 이미지 슬라이더의 실제 너비 기준으로 이동
+    const slider = workListRef.current;
+    if (slider) {
+      const slideWidth = slider.parentElement?.offsetWidth || window.innerWidth;
+      gsap.to(slider, {
+        x: -index * slideWidth,
+        duration: 0.5,
+        ease: 'power2.out',
+        onComplete: () => {
+          isAnimating.current = false;
+        },
+      });
+    } else {
+      isAnimating.current = false;
+    }
   };
 
   useEffect(() => {
@@ -319,15 +335,22 @@ const Main: React.FC = () => {
       {/* 작업 섹션 */}
       <section id="news" className="panel work-section" aria-label="프로젝트">
         <div className="work-container">
-          <h2 className="work-title">{splitText('Projects')}</h2>
-
-          <ul className="work-list" role="list" ref={workListRef}>
-            {projects.map(project => (
-              <li key={project.id} className="work-slide">
-                {/* 왼쪽: 미디어 영역 */}
-                <div className="work-image-area">
+          {/* 왼쪽: 이미지 슬라이더 영역 */}
+          <div className="work-image-area">
+            <div className="work-image-slider" ref={workListRef}>
+              {projects.map(project => (
+                <div key={project.id} className="work-image-slide">
                   {project.image && (
-                    project.image.endsWith('.mp4') ? (
+                    project.image.includes('youtube.com') ? (
+                      <iframe
+                        src={project.image}
+                        title={project.title}
+                        className="work-thumbnail"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      />
+                    ) : project.image.endsWith('.mp4') ? (
                       <video
                         src={project.image}
                         autoPlay
@@ -345,36 +368,42 @@ const Main: React.FC = () => {
                     )
                   )}
                 </div>
+              ))}
+            </div>
+          </div>
 
-                {/* 오른쪽: 정보 영역 */}
-                <div className="work-info-area">
-                  <h3 className="work-project-title">{project.title}</h3>
-                  <div className="work-description-box">
-                    <p>{project.description}</p>
-                  </div>
-                  {project.tech && project.tech.length > 0 && (
-                    <ul className="work-tech-list">
-                      {project.tech.map((tech, index) => (
-                        <li key={index}>{tech}</li>
-                      ))}
-                    </ul>
-                  )}
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="work-link"
-                    >
-                      사이트 바로가기
-                      <i className="ico ico-arrow" aria-hidden="true"></i>
-                    </a>
-                  )}
+          {/* 오른쪽: 텍스트 영역 (페이드 전환) */}
+          <div className="work-info-area">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`work-info-content ${currentProject === index ? 'active' : ''}`}
+              >
+                <h3 className="work-project-title">{project.title}</h3>
+                <div className="work-description-box">
+                  <p>{project.description}</p>
                 </div>
-              </li>
+                {project.tech && project.tech.length > 0 && (
+                  <ul className="work-tech-list">
+                    {project.tech.map((tech, techIndex) => (
+                      <li key={techIndex}>{tech}</li>
+                    ))}
+                  </ul>
+                )}
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="work-link"
+                  >
+                    사이트 바로가기
+                    <i className="ico ico-arrow" aria-hidden="true"></i>
+                  </a>
+                )}
+              </div>
             ))}
-          </ul>
-
+          </div>
         </div>
       </section>
 
