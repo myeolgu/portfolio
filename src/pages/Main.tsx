@@ -363,7 +363,7 @@ const Main: React.FC = () => {
   return (
     <div className="wrap">
       {/* 인트로 섹션 */}
-      <section className="panel intro-section">
+      <section className="panel intro-section" aria-label="인트로">
         <video
           ref={videoRef}
           autoPlay
@@ -380,11 +380,11 @@ const Main: React.FC = () => {
       {/* 소개 섹션 */}
       <section id="about" className="panel about-section" aria-label="소개">
         <div className="about-container">
-          <div className="about-text">
-            <p className="text">{splitText('디테일한 마크업 위에')}</p>
-            <p className="text">{splitText('인터랙션을 더하는')}</p>
-            <p className="text">{splitText('퍼블리셔')}</p>
-          </div>
+          <h2 className="about-text">
+            <span className="text">{splitText('디테일한 마크업 위에')}</span>
+            <span className="text">{splitText('인터랙션을 더하는')}</span>
+            <span className="text">{splitText('퍼블리셔')}</span>
+          </h2>
 
           <div className="about-description">
             3년간 웹 에이전시에서 다양한 클라이언트 프로젝트를 경험하며 정확한 마크업과 크로스브라우징, 반응형 구현에 대한 실무 감각을 쌓아왔습니다. 디자인 시안을 픽셀 단위로 구현하는 것에서 나아가, 사용자가 실제로 편하게 느끼는 UI를 만드는 데 관심을 두고 있습니다.
@@ -397,10 +397,20 @@ const Main: React.FC = () => {
       <section id="news" className="panel work-section" aria-label="프로젝트">
         <div className="work-container">
           {/* 왼쪽: 이미지 슬라이더 영역 */}
-          <div className="work-image-area" ref={workImageAreaRef}>
+          <div
+            className="work-image-area"
+            ref={workImageAreaRef}
+            role="region"
+            aria-label={`프로젝트 슬라이더, ${currentProject + 1}/${totalProjects}`}
+            aria-live="polite"
+          >
             <div className="work-image-slider" ref={workListRef}>
-              {projects.map(project => (
-                <div key={project.id} className="work-image-slide">
+              {projects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="work-image-slide"
+                  aria-hidden={currentProject !== index}
+                >
                   {project.image && (
                     project.image.includes('youtube.com') ? (
                       <iframe
@@ -419,6 +429,7 @@ const Main: React.FC = () => {
                         muted
                         playsInline
                         className="work-thumbnail"
+                        aria-label={`${project.title} 프로젝트 영상`}
                       />
                     ) : (
                       <img
@@ -457,6 +468,7 @@ const Main: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="work-link"
+                    aria-label={`${project.title} 사이트 바로가기`}
                   >
                     사이트 바로가기
                     <i className="ico ico-arrow" aria-hidden="true"></i>

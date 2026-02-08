@@ -42,8 +42,8 @@ export const projects: Project[] = [
   {
     id: 4,
     title: '롯데호텔 시니어 케어 플랫폼 담디 APP 구축',
-    description: '2차 개발로 투입되어 마크업과 스크립트를 단독으로 담당했습니다. 기존 서비스에 새로운 기능을 추가하고 고도화 작업을 수행했습니다.',
-    tech: ['HTML5', 'SCSS', 'JavaScript', 'Mobile'],
+    description: '2차 개발로 투입되어 마크업과 스크립트를 단독으로 담당했습니다. amCharts를 활용한 데이터 시각화 작업을 진행했으며, 개발자분들과 긴밀히 소통하며 원활한 협업으로 좋은 평가를 받았습니다.',
+    tech: ['HTML5', 'SCSS', 'JavaScript', 'amCharts', 'Mobile'],
     link: 'https://daddl.lottesrc.com/',
     image: damdiVideo,
     background: '#ffffff',
@@ -52,7 +52,7 @@ export const projects: Project[] = [
   {
     id: 5,
     title: '대명 아임 레디 리뉴얼 구축',
-    description: '퍼블리셔 3명이 참여한 프로젝트로, 마크업과 스크립트 개발을 담당했습니다. 상조 서비스 웹사이트를 신규 구축하여 사용자 편의성을 높였습니다.',
+    description: '퍼블리셔 3명이 참여한 프로젝트로, 마크업과 스크립트 개발을 담당했습니다. 상조 서비스 웹사이트를 신규 구축하였습니다.',
     tech: ['HTML5', 'SCSS', 'JavaScript'],
     link: 'https://www.sonoimready.com/main/front/main',
     image: sonoVideo,
@@ -62,8 +62,8 @@ export const projects: Project[] = [
   {
     id: 6,
     title: '큐브 리펀드 리뉴얼 구축',
-    description: '퍼블리셔 2명이 참여한 프로젝트로, 마크업과 스크립트 개발을 담당했습니다. 세금 환급 서비스 웹사이트를 전면 리뉴얼하여 접근성을 향상시켰습니다.',
-    tech: ['React', 'TypeScript', 'SCSS'],
+    description: 'React와 TypeScript 기반으로 전환한 리뉴얼 프로젝트로, 퍼블리셔 2명이 참여했습니다. 컴포넌트 단위의 퍼블리싱을 진행하며 React 환경에서의 마크업 경험을 쌓았습니다.',
+    tech: ['React', 'TypeScript', 'SCSS', 'GSAP'],
     link: 'https://www.cuberefund.com/',
     image: cubeImg,
     background: '#ffffff',
