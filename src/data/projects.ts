@@ -12,8 +12,8 @@ export const projects: Project[] = [
   {
     id: 1,
     title: 'LG화학 메인 리뉴얼',
-    description: '페이지 애니메이션 구현 및 GSAP을 도입한 LG화학 메인 페이지 리뉴얼. 사용자 인터랙션 향상과 유지보수 효율성 개선에 기여했습니다.',
-    tech: ['HTML5', 'SCSS', 'JavaScript'],
+    description: 'GSAP을 처음 도입한 프로젝트로, 메인 페이지 마크업과 스크립트를 단독으로 담당했습니다. 새로운 기술 학습과 구현에 도전하며 성장할 수 있었던 보람찬 경험이었습니다.',
+    tech: ['HTML5', 'SCSS', 'JavaScript', 'GSAP'],
     link: 'https://www.lgchem.com/career/index',
     image: lgchemImg,
     background: '#ffffff',
@@ -22,7 +22,7 @@ export const projects: Project[] = [
   {
     id: 2,
     title: '시니어 레지던스 홈페이지 구축',
-    description: '고급 시니어 주거 시설을 위한 반응형 웹사이트를 신규 구축하여 사용자 친화적인 UI/UX를 제공했습니다.',
+    description: '퍼블리셔 3명이 참여한 프로젝트로, 마크업과 스크립트 개발을 담당했습니다. 고급 시니어 주거 시설을 위한 반응형 웹사이트를 신규 구축했습니다.',
     tech: ['HTML5', 'SCSS', 'JavaScript'],
     link: 'https://www.lottesrc.com/vl',
     image: lotteImg,
@@ -32,7 +32,7 @@ export const projects: Project[] = [
   {
     id: 3,
     title: '삼성자산운용 ETF 펀드솔루션 리뉴얼',
-    description: '삼성자산운용 ETF 및 펀드솔루션 플랫폼 전면 리뉴얼 프로젝트를 진행하여 사용자 경험을 개선했습니다.',
+    description: '총 4명의 퍼블리셔가 참여한 대규모 리뉴얼 프로젝트에서 마크업과 스크립트를 담당했습니다. 차트 영역을 제외한 전반적인 UI 구현을 맡았습니다.',
     tech: ['HTML5', 'SCSS', 'JavaScript'],
     link: 'https://m.funetf.co.kr/',
     image: samsungVideo,
@@ -42,7 +42,7 @@ export const projects: Project[] = [
   {
     id: 4,
     title: '롯데호텔 시니어 케어 플랫폼 담디 APP 구축',
-    description: '롯데호텔의 시니어 케어 플랫폼 담디 앱의 추가 기능 개발 및 고도화 작업을 수행했습니다.',
+    description: '2차 개발로 투입되어 마크업과 스크립트를 단독으로 담당했습니다. 기존 서비스에 새로운 기능을 추가하고 고도화 작업을 수행했습니다.',
     tech: ['HTML5', 'SCSS', 'JavaScript', 'Mobile'],
     link: 'https://daddl.lottesrc.com/',
     image: damdiVideo,
@@ -52,7 +52,7 @@ export const projects: Project[] = [
   {
     id: 5,
     title: '대명 아임 레디 리뉴얼 구축',
-    description: '대명 아임 레디 상조 서비스 웹사이트를 신규 구축하여 사용자에게 편리한 서비스 이용 환경을 제공했습니다.',
+    description: '퍼블리셔 3명이 참여한 프로젝트로, 마크업과 스크립트 개발을 담당했습니다. 상조 서비스 웹사이트를 신규 구축하여 사용자 편의성을 높였습니다.',
     tech: ['HTML5', 'SCSS', 'JavaScript'],
     link: 'https://www.sonoimready.com/main/front/main',
     image: sonoVideo,
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   {
     id: 6,
     title: '큐브 리펀드 리뉴얼 구축',
-    description: '큐브 리펀드 세금 환급 서비스 웹사이트를 전면 리뉴얼하여 사용자 편의성과 접근성을 향상시켰습니다.',
+    description: '퍼블리셔 2명이 참여한 프로젝트로, 마크업과 스크립트 개발을 담당했습니다. 세금 환급 서비스 웹사이트를 전면 리뉴얼하여 접근성을 향상시켰습니다.',
     tech: ['React', 'TypeScript', 'SCSS'],
     link: 'https://www.cuberefund.com/',
     image: cubeImg,
