@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './Footer';
 import Header from './Header';
 import Modal from './Modal';
 import CustomCursor from '../ui/CustomCursor';
@@ -14,7 +13,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <CustomCursor />
       <Header />
       <main className="main">{children}</main>
-      <Footer />
       <Modal />
     </>
   );
