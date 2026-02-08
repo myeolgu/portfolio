@@ -1,14 +1,10 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.cd334d24.css",
-    "main.js": "/portfolio/static/js/main.5ecc318e.js",
+    "main.css": "/portfolio/static/css/main.8f3cd1be.css",
+    "main.js": "/portfolio/static/js/main.dc1566d6.js",
     "static/js/788.fdbc1f8d.chunk.js": "/portfolio/static/js/788.fdbc1f8d.chunk.js",
     "static/media/video.mp4": "/portfolio/static/media/video.ebe6434e6768f211662a.mp4",
-    "static/media/cube.jpg": "/portfolio/static/media/cube.39581c9f9b5def83000a.jpg",
-    "static/media/damdi.jpg": "/portfolio/static/media/damdi.39581c9f9b5def83000a.jpg",
-    "static/media/lotte.jpg": "/portfolio/static/media/lotte.39581c9f9b5def83000a.jpg",
-    "static/media/samsung.jpg": "/portfolio/static/media/samsung.39581c9f9b5def83000a.jpg",
-    "static/media/sono.jpg": "/portfolio/static/media/sono.39581c9f9b5def83000a.jpg",
+    "static/media/daddl.jpg": "/portfolio/static/media/daddl.f58f297cd48673277726.jpg",
     "static/media/PretendardVariable.subset.2.woff2": "/portfolio/static/media/PretendardVariable.subset.2.9667e13e5c71c8804d7b.woff2",
     "static/media/PretendardVariable.subset.19.woff2": "/portfolio/static/media/PretendardVariable.subset.19.3e26efb755349142f245.woff2",
     "static/media/PretendardVariable.subset.25.woff2": "/portfolio/static/media/PretendardVariable.subset.25.236bc3f20de2b36554a2.woff2",
@@ -81,6 +77,7 @@
     "static/media/PretendardVariable.subset.83.woff2": "/portfolio/static/media/PretendardVariable.subset.83.39c27cf531e8f3a9e1ac.woff2",
     "static/media/PretendardVariable.subset.78.woff2": "/portfolio/static/media/PretendardVariable.subset.78.3584d41319fa85852666.woff2",
     "static/media/PretendardVariable.subset.82.woff2": "/portfolio/static/media/PretendardVariable.subset.82.c6e35e43b3c6d0683e54.woff2",
+    "static/media/sono.jpg": "/portfolio/static/media/sono.457ed360d958062259ce.jpg",
     "static/media/PretendardVariable.subset.81.woff2": "/portfolio/static/media/PretendardVariable.subset.81.97f95f86855a460417d8.woff2",
     "static/media/PretendardVariable.subset.79.woff2": "/portfolio/static/media/PretendardVariable.subset.79.301f9d45bce5ff33c342.woff2",
     "static/media/PretendardVariable.subset.77.woff2": "/portfolio/static/media/PretendardVariable.subset.77.ca5a85d89459492eca27.woff2",
@@ -98,17 +95,18 @@
     "static/media/PretendardVariable.subset.72.woff2": "/portfolio/static/media/PretendardVariable.subset.72.bce0e62efa706d77be46.woff2",
     "static/media/PretendardVariable.subset.73.woff2": "/portfolio/static/media/PretendardVariable.subset.73.189d130197f0eca453cc.woff2",
     "static/media/PretendardVariable.subset.68.woff2": "/portfolio/static/media/PretendardVariable.subset.68.353636111cf3d73e4491.woff2",
+    "static/media/cube.jpg": "/portfolio/static/media/cube.28e035de041d4da0aa65.jpg",
     "static/media/PretendardVariable.subset.65.woff2": "/portfolio/static/media/PretendardVariable.subset.65.04f5608248ecc5398eb7.woff2",
     "static/media/PretendardVariable.subset.64.woff2": "/portfolio/static/media/PretendardVariable.subset.64.655f98243e6df944eb9d.woff2",
     "static/media/PretendardVariable.subset.66.woff2": "/portfolio/static/media/PretendardVariable.subset.66.e62b83b62a94bc3aadd3.woff2",
     "static/media/lgchem.svg": "/portfolio/static/media/lgchem.99197a507391487252dd91f6235f4be2.svg",
     "index.html": "/portfolio/index.html",
-    "main.cd334d24.css.map": "/portfolio/static/css/main.cd334d24.css.map",
-    "main.5ecc318e.js.map": "/portfolio/static/js/main.5ecc318e.js.map",
+    "main.8f3cd1be.css.map": "/portfolio/static/css/main.8f3cd1be.css.map",
+    "main.dc1566d6.js.map": "/portfolio/static/js/main.dc1566d6.js.map",
     "788.fdbc1f8d.chunk.js.map": "/portfolio/static/js/788.fdbc1f8d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cd334d24.css",
-    "static/js/main.5ecc318e.js"
+    "static/css/main.8f3cd1be.css",
+    "static/js/main.dc1566d6.js"
   ]
 }
