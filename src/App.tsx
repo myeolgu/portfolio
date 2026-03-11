@@ -12,7 +12,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    // 로컬 환경인지 확인하여 basename을 다르게 설정합니다.
+    <BrowserRouter basename={process.env.NODE_ENV === 'development' ? '/' : process.env.PUBLIC_URL}>
       {showIntro && <Intro onComplete={handleIntroComplete} />}
       <Layout>
         <Routes>

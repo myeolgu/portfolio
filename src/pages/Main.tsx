@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import React, { useEffect, useRef, useState } from 'react';
 import { useModalStore } from '../store/modalStore';
 import { projects } from '../data/projects';
+import Modal from '../components/ui/Modal';
 
 const Main: React.FC = () => {
   const textRefs = useRef<HTMLSpanElement[][]>([]);
@@ -464,16 +465,15 @@ const Main: React.FC = () => {
                   </ul>
                 )}
                 {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => useModalStore.getState().openModal(project)}
                     className="work-link"
-                    aria-label={`${project.title} 사이트 바로가기`}
+                    aria-label={`${project.title} 인사이트 및 성과 보기`}
+                    style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer' }}
                   >
-                    사이트 바로가기
+                    프로젝트 인사이트 💡
                     <i className="ico ico-arrow" aria-hidden="true"></i>
-                  </a>
+                  </button>
                 )}
               </div>
             ))}
@@ -496,6 +496,9 @@ const Main: React.FC = () => {
           </address>
         </div>
       </section>
+      
+      {/* 팝업 모달 */}
+      <Modal />
     </div>
   );
 };

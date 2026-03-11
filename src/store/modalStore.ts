@@ -12,6 +12,9 @@ export interface Project {
   thumbnailHeight?: string; // 썸네일 높이 (선택적)
   tech?: string[];         // 사용된 기술 스택 배열 (선택적)
   link?: string;           // 프로젝트 링크 (선택적)
+  problem?: string;        // 프로젝트 배경/문제 상황 (선택적)
+  action?: string;         // 해결 과정/기술적 결정 (선택적)
+  result?: string;         // 비즈니스 임팩트/결과 (선택적)
 }
 
 // 모달 스토어의 상태와 액션을 정의하는 인터페이스
