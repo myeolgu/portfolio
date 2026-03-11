@@ -6,24 +6,26 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7); /* 기존 백그라운드 딤 처리 유지 */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* 기존 백그라운드 딤 처리 유지 */
   z-index: 99999;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 1; /* 애초에 보이게 둡니다 */
+  opacity: 1;
+  /* 애초에 보이게 둡니다 */
   animation: modalOverlayFadeIn 0.3s ease forwards;
   backdrop-filter: blur(5px);
 }
 
 .modal-container {
-  background-color: var(--white);
+  background-color: #ffffff;
   width: 90%;
-  max-width: 1000px;
-  height: 85vh;
+  max-width: 800px;
+  max-height: 85vh;
   border-radius: 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -31,8 +33,7 @@
   animation: modalContainerSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @include mobile {
-    flex-direction: column;
-    height: 90vh;
+    max-height: 90vh;
   }
 }
 
@@ -49,7 +50,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
   color: var(--black);
   transition: all 0.3s ease;
   backdrop-filter: blur(4px);
@@ -72,7 +73,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8f9fa; /* 기본 배경 */
+  background-color: #f8f9fa;
+  /* 기본 배경 */
   overflow: hidden;
 
   @include mobile {
@@ -91,34 +93,48 @@
   }
 }
 
-/* 우측 텍스트 상세 영역 */
+/* 텍스트 상세 영역 */
 .modal-content {
-  flex: 1.2;
   display: flex;
   flex-direction: column;
-  background-color: var(--white);
-  height: 100%;
-  overflow-y: auto;
+  background-color: #ffffff;
+  overflow: hidden;
   position: relative;
-
-  /* 스크롤바 커스텀 */
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--gray);
-    border-radius: 10px;
-  }
+  flex: 1;
+  min-height: 0;
 }
 
 .modal-header {
-  padding: 40px 40px 20px;
-  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  padding: 2rem 4rem 2rem;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
 
   @include mobile {
     padding: 25px 25px 15px;
   }
 }
+
+.modal-body {
+  padding: 30px 40px;
+  overflow-y: auto;
+  flex: 1;
+
+  /* 스크롤바 커스텀 */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+
+  @include mobile {
+    padding: 20px 25px;
+  }
+}
+
 
 .modal-title {
   font-size: 28px;
@@ -187,7 +203,9 @@
   }
 
   &.highlight {
-    color: #0056b3; /* 메인 테마 강조 컬러 호환 */
+    color: #0056b3;
+
+    /* 메인 테마 강조 컬러 호환 */
     svg {
       color: #0056b3;
     }
@@ -198,14 +216,15 @@
   font-size: 15px;
   color: var(--text-color);
   line-height: 1.7;
-  padding-left: 26px; /* 아이콘 넓이만큼 들여쓰기 */
+  padding-left: 26px;
+  /* 아이콘 넓이만큼 들여쓰기 */
   background: var(--light-gray);
   padding: 16px 20px 16px 26px;
   border-radius: 8px;
   border-left: 4px solid var(--dark-gray);
 
   /* 결과 섹션용 파란 테두리 */
-  .insight-section .highlight + & {
+  .insight-section .highlight+& {
     border-left-color: #0056b3;
     background: #f0f7ff;
   }
@@ -245,8 +264,13 @@
 
 /* 애니메이션 */
 @keyframes modalOverlayFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalContainerSlideUp {
@@ -254,6 +278,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import Modal from './Modal';
+import Modal from '../ui/Modal';
 import CustomCursor from '../ui/CustomCursor';
 
 const Layout = ({ children }) => {

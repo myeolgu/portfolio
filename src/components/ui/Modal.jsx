@@ -34,34 +34,12 @@ const Modal = () => {
           <X size={24} />
         </button>
 
-        {/* 좌측: 비주얼 영역 (이미지/영상) */}
-        <div className="modal-visual" style={{ background: selectedProject.background || '#f5f5f5' }}>
-          {selectedProject.image && (
-            selectedProject.image.includes('youtube') || selectedProject.image.includes('.mp4') ? (
-              <iframe
-                src={selectedProject.image}
-                title={selectedProject.title}
-                allow="autoplay; fullscreen"
-                frameBorder="0"
-                className="modal-media"
-              />
-            ) : (
-              <img src={selectedProject.image} alt={selectedProject.title} className="modal-media img" />
-            )
-          )}
-        </div>
 
         {/* 우측: 텍스트 및 상세 스토리 영역 */}
         <div className="modal-content">
-          <header className="modal-header">
+          <div className="modal-header">
             <h2 className="modal-title">{selectedProject.title}</h2>
-            <div className="modal-tech-stack">
-              {selectedProject.tech?.map((t, idx) => (
-                <span key={idx} className="tech-badge">{t}</span>
-              ))}
-            </div>
-            <p className="modal-desc">{selectedProject.description}</p>
-          </header>
+          </div>
 
           <div className="modal-body">
             {/* 배경 및 목표 (문제 상황) */}

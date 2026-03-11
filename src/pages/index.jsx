@@ -130,9 +130,9 @@ const Main = () => {
 
     // 휠 이벤트 핸들러 (768px 초과에서만 동작)
     const handleWheel = (e) => {
-      e.preventDefault(); // 768px 이하에서도 휠 스크롤 완전 차단
-
       if (isMobile || isModalOpen) return;
+
+      e.preventDefault();
 
       if (isAnimating.current) return;
 
