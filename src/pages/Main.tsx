@@ -381,14 +381,15 @@ const Main: React.FC = () => {
       <section className="panel about-section" aria-label="소개">
         <div className="about-container">
           <h2 className="about-text">
-            <span className="text">{splitText('디테일한 마크업 위에')}</span>
-            <span className="text">{splitText('인터랙션을 더하는')}</span>
-            <span className="text">{splitText('퍼블리셔')}</span>
+            <span className="text">{splitText('마크업을 넘어,')}</span>
+            <span className="text">{splitText('비즈니스 임팩트를 창출하는')}</span>
+            <span className="text">{splitText('Growth Tech 퍼블리셔')}</span>
           </h2>
 
           <p className="about-description">
-            3년간 웹 에이전시에서 다양한 클라이언트 프로젝트를 경험하며 정확한 마크업과 크로스브라우징, 반응형 구현에 대한 실무 감각을 쌓아왔습니다. 디자인 시안을 픽셀 단위로 구현하는 것에서 나아가, 사용자가 실제로 편하게 느끼는 UI를 만드는 데 관심을 두고 있습니다.
-현재는 JavaScript와 React를 학습하며 퍼블리싱의 영역을 넓혀가고 있습니다. 탄탄한 CSS 기반 위에 컴포넌트 설계와 상태 관리 역량을 더해, 설계부터 구현까지 아우르는 개발자로 성장하고자 합니다.
+            3년간 대규모 웹 플랫폼과 마케팅 프로젝트의 UI 개발을 리드하며, 웹의 첫 페이지가 가지는 막대한 비즈니스 가치를 체득했습니다. 시맨틱 마크업과 픽셀 퍼펙트를 기본으로, Core Web Vitals 최적화와 SEO 아키텍처 설계를 통해 서비스 오가닉 유입률을 극대화합니다.
+            <br /><br />
+            최근에는 React/Next.js 기반의 컴포넌트 개발 환경뿐만 아니라, AI Coding Agent를 실무에 도입하여 기존 대비 80% 이상의 생산성 혁신을 이루어내고 있습니다. 단순한 View 구성을 넘어, GA4/GTM 데이터 트래킹 및 파이프라인 자동화까지 고민하는 '완성에 초점을 맞춘' 퍼포먼스 전문가입니다.
           </p>
         </div>
       </section>
