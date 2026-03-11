@@ -59,17 +59,17 @@ const Intro = ({ onComplete }) => {
         x: -window.innerWidth / 2 + 80,
         y: -window.innerHeight / 2 + 60,
         scale: 0.3,
-        duration: 0.8,
+        duration: 1.2,
         ease: 'power3.inOut',
       });
     }
 
-    // 4단계: 오버레이 페이드아웃 → Hero 등장
+    // 4단계: 오버레이 페이드아웃 → Hero 등장 (조금 더 늦게 등장하게 수정)
     tl.to(overlayRef.current, {
       opacity: 0,
-      duration: 0.5,
+      duration: 0.8,
       ease: 'power2.out',
-    }, '-=0.2');
+    }, '+=0.3');
 
   }, [onComplete]);
 

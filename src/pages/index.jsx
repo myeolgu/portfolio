@@ -378,7 +378,7 @@ const Main = () => {
           className="about-video"
           aria-label="배경 영상"
         >
-          <source src="/videos/video.mp4" type="video/mp4" />
+          <source src="/portfolio/videos/video.mp4" type="video/mp4" />
         </video>
 
         {/* Hero 텍스트 오버레이 */}
