@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../styles/style.scss';
-import '../styles/globals.css';
 
 import Layout from '../components/layout/Layout';
 import Intro from '../components/ui/Intro';

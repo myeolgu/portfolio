@@ -1,4 +1,4 @@
-@import './base/mixin.scss';
+@import '../base/mixin.scss';
 
 .modal-overlay {
   position: fixed;
@@ -51,17 +51,17 @@
   align-items: center;
   cursor: pointer;
   z-index: 100;
-  color: var(--black);
+  color: #000000;
   transition: all 0.3s ease;
   backdrop-filter: blur(4px);
 
   @include mobile {
     background: rgba(0, 0, 0, 0.5);
-    color: var(--white);
+    color: #ffffff;
   }
 
   &:hover {
-    background: var(--light-gray);
+    background: #000000;
     transform: rotate(90deg);
   }
 }
@@ -139,7 +139,7 @@
 .modal-title {
   font-size: 28px;
   font-weight: 700;
-  color: var(--black);
+  color: #000000;
   margin-bottom: 16px;
   line-height: 1.3;
 
@@ -155,8 +155,8 @@
   margin-bottom: 20px;
 
   .tech-badge {
-    background-color: var(--light-gray);
-    color: var(--dark-gray);
+    background-color: #000000;
+    color: #000000;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 13px;
@@ -167,7 +167,7 @@
 
 .modal-desc {
   font-size: 16px;
-  color: var(--text-color);
+  color: #000000;
   line-height: 1.6;
 }
 
@@ -192,14 +192,14 @@
 .insight-title {
   font-size: 17px;
   font-weight: 700;
-  color: var(--black);
+  color: #000000;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
 
   svg {
-    color: var(--dark-gray);
+    color: #000000;
   }
 
   &.highlight {
@@ -214,14 +214,14 @@
 
 .insight-text {
   font-size: 15px;
-  color: var(--text-color);
+  color: #000000;
   line-height: 1.7;
   padding-left: 26px;
   /* 아이콘 넓이만큼 들여쓰기 */
-  background: var(--light-gray);
+  background: #f8f9fa;
   padding: 16px 20px 16px 26px;
   border-radius: 8px;
-  border-left: 4px solid var(--dark-gray);
+  border-left: 4px solid #000000;
 
   /* 결과 섹션용 파란 테두리 */
   .insight-section .highlight+& {
@@ -247,8 +247,8 @@
   gap: 10px;
   width: 100%;
   padding: 18px 0;
-  background-color: var(--black);
-  color: var(--white);
+  background-color: #000000;
+  color: #ffffff;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 600;

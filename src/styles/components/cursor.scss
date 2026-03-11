@@ -1,3 +1,5 @@
+@use '../base/mixin.scss' as *;
+
 // 커스텀 커서 스타일
 .custom-cursor {
   position: fixed;
