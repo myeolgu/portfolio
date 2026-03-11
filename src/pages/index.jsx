@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { gsap } from 'gsap';
 import React, { useEffect, useRef, useState } from 'react';
 import { useModalStore } from '../store/modalStore';
@@ -367,6 +368,9 @@ const Main = () => {
 
   return (
     <div className="wrap">
+      <Head>
+        <title>주엽 | 웹 퍼블리셔 포트폴리오</title>
+      </Head>
       {/* Hero 섹션 */}
       <section className="panel intro-section" aria-label="히어로">
         <video
