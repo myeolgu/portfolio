@@ -327,11 +327,12 @@ const Main = () => {
 
   // 섹션 변경 시 텍스트 애니메이션
   useEffect(() => {
-    // 섹션별 텍스트 그룹 매핑 (섹션 1: 0-2, 섹션 2: 3, 섹션 3: 4)
+    // 섹션별 텍스트 그룹 매핑 (Hero: 0-2, About: 3, Work: 4, Contact: 5)
     const sectionTextMap = {
-      1: [0, 1, 2], // about 섹션의 3줄
-      2: [3],       // work 섹션 타이틀
-      3: [4],       // contact 섹션 타이틀
+      0: [0, 1, 2], // Hero 섹션의 3줄
+      1: [3],       // About 섹션 "About Me"
+      2: [4],       // work 섹션 타이틀
+      3: [5],       // contact 섹션 타이틀
     };
 
     const groupIndices = sectionTextMap[currentSection];
@@ -366,8 +367,8 @@ const Main = () => {
 
   return (
     <div className="wrap">
-      {/* 인트로 섹션 */}
-      <section className="panel intro-section" aria-label="인트로">
+      {/* Hero 섹션 */}
+      <section className="panel intro-section" aria-label="히어로">
         <video
           ref={videoRef}
           autoPlay
@@ -379,22 +380,42 @@ const Main = () => {
         >
           <source src="/videos/video.mp4" type="video/mp4" />
         </video>
+
+        {/* Hero 텍스트 오버레이 */}
+        <div className="hero-overlay">
+          <h2 className="hero-title">
+            <span className="text">{splitText('마크업을 넘어,')}</span>
+            <span className="text">{splitText('비즈니스 임팩트를 창출하는')}</span>
+            <span className="text">{splitText('Growth Tech 퍼블리셔')}</span>
+          </h2>
+          <p className="hero-sub">UI 개발 · GSAP 인터랙션 · Core Web Vitals · SEO</p>
+        </div>
+
+        {/* 스크롤 인디케이터 */}
+        <div className="scroll-indicator">
+          <span className="scroll-text">Scroll</span>
+          <span className="scroll-line"></span>
+        </div>
       </section>
 
       {/* 소개 섹션 */}
       <section className="panel about-section" aria-label="소개">
         <div className="about-container">
-          <h2 className="about-text">
-            <span className="text">{splitText('마크업을 넘어,')}</span>
-            <span className="text">{splitText('비즈니스 임팩트를 창출하는')}</span>
-            <span className="text">{splitText('Growth Tech 퍼블리셔')}</span>
-          </h2>
+          <h2 className="about-heading">{splitText('About Me')}</h2>
 
           <p className="about-description">
             3년간 대규모 웹 플랫폼과 마케팅 프로젝트의 UI 개발을 리드하며, 웹의 첫 페이지가 가지는 막대한 비즈니스 가치를 체득했습니다. 시맨틱 마크업과 픽셀 퍼펙트를 기본으로, Core Web Vitals 최적화와 SEO 아키텍처 설계를 통해 서비스 오가닉 유입률을 극대화합니다.
             <br /><br />
             최근에는 React/Next.js 기반의 컴포넌트 개발 환경뿐만 아니라, AI Coding Agent를 실무에 도입하여 기존 대비 80% 이상의 생산성 혁신을 이루어내고 있습니다. 단순한 View 구성을 넘어, GA4/GTM 데이터 트래킹 및 파이프라인 자동화까지 고민하는 '완성에 초점을 맞춘' 퍼포먼스 전문가입니다.
           </p>
+
+          {/* 핵심 스킬 뱃지 */}
+          <div className="about-skills">
+            {['HTML5 / CSS3', 'SCSS', 'JavaScript', 'React', 'Next.js', 'GSAP', 'Git', 'SEO', 'GA4 / GTM', 'AI Agent'].map((skill, i) => (
+              <span key={i} className="skill-badge">{skill}</span>
+            ))}
+          </div>
+
         </div>
       </section>
 

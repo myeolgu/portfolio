@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-// 인트로 섹션
+// 인트로(Hero) 섹션
 .intro-section {
   width: 100%;
   height: 100vh;
@@ -32,6 +32,111 @@
   }
 }
 
+// Hero 텍스트 오버레이
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+  font-size: 6rem;
+  row-gap: 1.2rem;
+  font-weight: 700;
+
+  @include mobile {
+    font-size: 5rem;
+  }
+
+  .text {
+    width: 91rem;
+    max-width: 100%;
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 1000px;
+
+    span.split-char {
+      position: relative;
+      display: inline-block;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+  }
+}
+
+.hero-sub {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 3rem;
+  letter-spacing: 0.15em;
+
+  @include mobile {
+    font-size: 3.2rem;
+    margin-top: 4rem;
+  }
+}
+
+// 스크롤 인디케이터
+.scroll-indicator {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 3;
+
+  .scroll-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 4rem;
+    background: rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      animation: scrollDown 1.8s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes scrollDown {
+  0% { top: -100%; }
+  50% { top: 100%; }
+  100% { top: 100%; }
+}
+
 // 소개 섹션
 .about-section {
   display: flex;
@@ -43,52 +148,115 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 91rem;
   }
 
-  .about-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .about-heading {
     color: #ffffff;
-    font-size: 6rem;
-    row-gap: 1.2rem;
+    font-size: 5rem;
     font-weight: 700;
+    margin-bottom: 4rem;
+    overflow: hidden;
+    perspective: 1000px;
 
-    @media (max-width: 1024px) {
-      font-size: 6rem;
+    @include mobile {
+      font-size: 7rem;
     }
 
-    .text {
-      width: 91rem;
-      max-width: 100%;
-      display: flex;
-      gap: 0.2rem;
-      justify-content: center;
-      overflow: hidden;
-      perspective: 1000px;
-
-      span.split-char {
-        position: relative;
-        display: inline-block;
-        transform-style: preserve-3d;
-        will-change: transform, opacity;
-      }
+    span.split-char {
+      position: relative;
+      display: inline-block;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
     }
   }
 
   .about-description {
-    width: 91rem;
-    max-width: 100%;
-    color: #ffffff;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.85);
     font-size: 1.8rem;
     text-align: center;
-    margin-top: 4.8rem;
     line-height: 1.8;
 
+    @include mobile {
+      font-size: 3.6rem;
+      padding: 0 4rem;
+    }
+  }
+
+  // 스킬 뱃지
+  .about-skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 4rem;
+
+    @include mobile {
+      gap: 2rem;
+    }
+
+    .skill-badge {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.9);
+      padding: 0.8rem 2rem;
+      border-radius: 10rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+
       @include mobile {
-        width: 100%;
-        font-size: 4rem;
-        padding: 0 4rem;
+        font-size: 2.8rem;
+        padding: 1.4rem 3rem;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  // 경력 수치
+  .about-stats {
+    display: flex;
+    gap: 6rem;
+    margin-top: 5rem;
+
+    @include mobile {
+      gap: 8rem;
+      margin-top: 6rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .stat-number {
+      color: #ffffff;
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+
+      @include mobile {
+        font-size: 6rem;
+      }
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+
+      @include mobile {
+        font-size: 2.8rem;
+      }
     }
   }
 }

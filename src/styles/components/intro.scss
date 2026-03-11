@@ -1,88 +1,48 @@
 @use '../base/mixin.scss' as *;
 
 .intro-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    pointer-events: all;
-
-    &.animating {
-        pointer-events: none;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: #0a0a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
 }
 
-.intro-door {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    background: #0a0a0a;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 1px;
-        height: 100%;
-
-    }
+.intro-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
-.intro-door-left {
-    left: 0;
+.intro-logo {
+  color: #ffffff;
+  font-size: 8rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  will-change: transform;
+  line-height: 1;
 
-    &::before {
-        right: 0;
-    }
+  @include mobile {
+    font-size: 14rem;
+  }
 }
 
-.intro-door-right {
-    right: 0;
+.intro-counter {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  font-variant-numeric: tabular-nums;
 
-    &::before {
-        left: 0;
-    }
-}
-
-.intro-progress-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    z-index: 10;
-}
-
-.intro-progress {
-    width: 0;
-    height: 100%;
-    background: #ffffff;
-}
-
-.intro-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.intro-greeting {
-    color: #ffffff;
-    font-size: 2.4rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-
-    @include mobile {
-        font-size: 4rem;
-    }
+  @include mobile {
+    font-size: 2.8rem;
+  }
 }
