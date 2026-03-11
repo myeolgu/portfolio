@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-const CustomCursor: React.FC = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorDotRef = useRef<HTMLDivElement>(null);
+const CustomCursor = () => {
+  const cursorRef = useRef(null);
+  const cursorDotRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -14,7 +14,7 @@ const CustomCursor: React.FC = () => {
     if (!cursor || !cursorDot) return;
 
     // 마우스 위치 추적
-    const onMouseMove = (e: MouseEvent) => {
+    const onMouseMove = (e) => {
       // 외부 원 - 부드러운 따라다님
       gsap.to(cursor, {
         x: e.clientX,

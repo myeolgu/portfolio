@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-const Header: React.FC = () => {
-  const [scroll, setScroll] = useState<boolean>(false);
+const Header = () => {
+  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
-    const handleScroll = (): void => {
-      const isScroll: boolean = window.scrollY > 50;
+    const handleScroll = () => {
+      const isScroll = window.scrollY > 50;
       setScroll(isScroll);
     };
 

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useModalStore } from '../../store/modalStore';
 import { X, ExternalLink, Activity, Wrench, Trophy } from 'lucide-react';
-import '../../styles/Modal.scss'; // 우리가 만들 SCSS 파일
 
-const Modal: React.FC = () => {
+const Modal = () => {
   const { isOpen, selectedProject, closeModal } = useModalStore();
 
   // ESC 키로 모달 닫기
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e) => {
       if (e.key === 'Escape') closeModal();
     };
     if (isOpen) {
@@ -20,13 +20,13 @@ const Modal: React.FC = () => {
   if (!isOpen || !selectedProject) return null;
 
   // 배경 딤 처리 클릭으로 닫기
-  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleBackgroundClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
   };
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={handleBackgroundClick}>
       <div className="modal-container">
         {/* 모달 닫기 버튼 */}
@@ -56,7 +56,7 @@ const Modal: React.FC = () => {
           <header className="modal-header">
             <h2 className="modal-title">{selectedProject.title}</h2>
             <div className="modal-tech-stack">
-              {selectedProject.tech?.map((t: string, idx: number) => (
+              {selectedProject.tech?.map((t, idx) => (
                 <span key={idx} className="tech-badge">{t}</span>
               ))}
             </div>
@@ -106,7 +106,8 @@ const Modal: React.FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

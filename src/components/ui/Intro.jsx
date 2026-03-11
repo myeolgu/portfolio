@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 
-interface IntroProps {
-  onComplete: () => void;
-}
-
-const Intro: React.FC<IntroProps> = ({ onComplete }) => {
+const Intro = ({ onComplete }) => {
   const [isAnimating, setIsAnimating] = useState(false);
-  const progressRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef(null);
   const textFadedRef = useRef(false);
 
   useEffect(() => {

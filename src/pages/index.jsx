@@ -2,18 +2,17 @@ import { gsap } from 'gsap';
 import React, { useEffect, useRef, useState } from 'react';
 import { useModalStore } from '../store/modalStore';
 import { projects } from '../data/projects';
-import Modal from '../components/ui/Modal';
 
-const Main: React.FC = () => {
-  const textRefs = useRef<HTMLSpanElement[][]>([]);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const workListRef = useRef<HTMLDivElement>(null);
-  const workImageAreaRef = useRef<HTMLDivElement>(null);
-  const animatedSections = useRef<Set<number>>(new Set());
+const Main = () => {
+  const textRefs = useRef([]);
+  const videoRef = useRef(null);
+  const workListRef = useRef(null);
+  const workImageAreaRef = useRef(null);
+  const animatedSections = useRef(new Set());
   const { isOpen: isModalOpen } = useModalStore();
   const [currentSection, setCurrentSection] = useState(0);
   const [currentProject, setCurrentProject] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1023);
+  const [isMobile, setIsMobile] = useState(false);
   const isAnimating = useRef(false);
   const totalProjects = projects.length;
 
@@ -26,8 +25,11 @@ const Main: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // 리사이즈 이벤트로 화면 크기 추적
+  // 동작 중 화면 크기 추적 (초기 세팅 포함)
   useEffect(() => {
+    // 최초 브라우저 렌더링 시점에만 값을 가져옴 (SSR 회피)
+    setIsMobile(window.innerWidth <= 1023);
+    
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1023);
     };
@@ -55,9 +57,9 @@ const Main: React.FC = () => {
   }, []);
 
   // 텍스트 분리
-  const splitText = (text: string): React.ReactElement[] => {
-    const spanGroup: HTMLSpanElement[] = [];
-    const elements = text.split('').map((char: string, index: number) => (
+  const splitText = (text) => {
+    const spanGroup = [];
+    const elements = text.split('').map((char, index) => (
       <span
         key={index}
         className="split-char"
@@ -75,17 +77,23 @@ const Main: React.FC = () => {
   };
 
   // 섹션 이동 함수
-  const goToSection = (index: number) => {
+  const goToSection = (index) => {
     const sections = document.querySelectorAll('.panel');
     if (index < 0 || index >= sections.length || isAnimating.current) return;
 
     isAnimating.current = true;
     setCurrentSection(index);
 
-    gsap.to(window, {
-      scrollTo: { y: sections[index], autoKill: false },
+    const targetY = window.scrollY + sections[index].getBoundingClientRect().top;
+    const scrollProxy = { y: window.scrollY };
+
+    gsap.to(scrollProxy, {
+      y: targetY,
       duration: 0.8,
       ease: 'power2.inOut',
+      onUpdate: () => {
+        window.scrollTo(0, scrollProxy.y);
+      },
       onComplete: () => {
         isAnimating.current = false;
       },
@@ -93,7 +101,7 @@ const Main: React.FC = () => {
   };
 
   // 프로젝트 가로 스크롤 함수
-  const goToProject = (index: number) => {
+  const goToProject = (index) => {
     if (index < 0 || index >= totalProjects || isAnimating.current) return;
 
     isAnimating.current = true;
@@ -117,16 +125,11 @@ const Main: React.FC = () => {
   };
 
   useEffect(() => {
-    // GSAP ScrollTo 플러그인 동적 로드
-    import('gsap/ScrollToPlugin').then(({ ScrollToPlugin }) => {
-      gsap.registerPlugin(ScrollToPlugin);
-    });
-
     const sections = document.querySelectorAll('.panel');
     const totalSections = sections.length;
 
     // 휠 이벤트 핸들러 (768px 초과에서만 동작)
-    const handleWheel = (e: WheelEvent) => {
+    const handleWheel = (e) => {
       e.preventDefault(); // 768px 이하에서도 휠 스크롤 완전 차단
 
       if (isMobile || isModalOpen) return;
@@ -165,7 +168,7 @@ const Main: React.FC = () => {
     };
 
     // 키보드 이벤트 핸들러 (768px 초과에서만 동작)
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e) => {
       if (isMobile || isModalOpen || isAnimating.current) return;
 
       // 프로젝트 섹션에서 가로 스크롤
@@ -200,18 +203,18 @@ const Main: React.FC = () => {
     // 터치 이벤트 (모바일 풀페이지)
     let touchStartY = 0;
     let touchStartX = 0;
-    const handleTouchStart = (e: TouchEvent) => {
+    const handleTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
       touchStartX = e.touches[0].clientX;
     };
 
     // 터치 이동 중 기본 스크롤 차단 (풀페이지 효과 유지)
-    const handleTouchMove = (e: TouchEvent) => {
+    const handleTouchMove = (e) => {
       if (isModalOpen) return;
       e.preventDefault();
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
+    const handleTouchEnd = (e) => {
       if (isModalOpen || isAnimating.current) return;
 
       const touchEndY = e.changedTouches[0].clientY;
@@ -280,12 +283,12 @@ const Main: React.FC = () => {
     let touchStartX = 0;
     let touchStartY = 0;
 
-    const handleTouchStart = (e: TouchEvent) => {
+    const handleTouchStart = (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
+    const handleTouchEnd = (e) => {
       if (isAnimating.current) return;
 
       const touchEndX = e.changedTouches[0].clientX;
@@ -325,7 +328,7 @@ const Main: React.FC = () => {
   // 섹션 변경 시 텍스트 애니메이션
   useEffect(() => {
     // 섹션별 텍스트 그룹 매핑 (섹션 1: 0-2, 섹션 2: 3, 섹션 3: 4)
-    const sectionTextMap: { [key: number]: number[] } = {
+    const sectionTextMap = {
       1: [0, 1, 2], // about 섹션의 3줄
       2: [3],       // work 섹션 타이틀
       3: [4],       // contact 섹션 타이틀
@@ -374,7 +377,7 @@ const Main: React.FC = () => {
           className="about-video"
           aria-label="배경 영상"
         >
-          <source src={require('../assets/videos/video.mp4')} type="video/mp4" />
+          <source src="/videos/video.mp4" type="video/mp4" />
         </video>
       </section>
 
@@ -466,12 +469,14 @@ const Main: React.FC = () => {
                 )}
                 {project.link && (
                   <button
-                    onClick={() => useModalStore.getState().openModal(project)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      useModalStore.getState().openModal(project);
+                    }}
                     className="work-link"
-                    aria-label={`${project.title} 인사이트 및 성과 보기`}
-                    style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer' }}
+                    aria-label={`${project.title} 자세히 보기`}
                   >
-                    프로젝트 인사이트 💡
+                    자세히 보기
                     <i className="ico ico-arrow" aria-hidden="true"></i>
                   </button>
                 )}
@@ -496,9 +501,6 @@ const Main: React.FC = () => {
           </address>
         </div>
       </section>
-      
-      {/* 팝업 모달 */}
-      <Modal />
     </div>
   );
 };

@@ -7,12 +7,12 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7); /* 기존 백그라운드 딤 처리 유지 */
-  z-index: 1000;
+  z-index: 99999;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  animation: fadeIn 0.3s ease forwards;
+  opacity: 1; /* 애초에 보이게 둡니다 */
+  animation: modalOverlayFadeIn 0.3s ease forwards;
   backdrop-filter: blur(5px);
 }
 
@@ -27,8 +27,8 @@
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   position: relative;
-  transform: translateY(20px);
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform: translateY(0);
+  animation: modalContainerSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @include mobile {
     flex-direction: column;
@@ -244,12 +244,12 @@
 }
 
 /* 애니메이션 */
-@keyframes fadeIn {
+@keyframes modalOverlayFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes slideUp {
+@keyframes modalContainerSlideUp {
   from {
     opacity: 0;
     transform: translateY(40px);

@@ -1,14 +1,12 @@
-import { Project } from '../store/modalStore';
 
-// 이미지 import
-import lgchemImg from '../assets/videos/lg_intro.mp4';
-import lotteImg from '../assets/videos/lotte_intro.mp4';
+const lgchemImg = '/videos/lg_intro.mp4';
+const lotteImg = '/videos/lotte_intro.mp4';
 const samsungVideo = 'https://www.youtube.com/embed/v1r4XlDyFPU?autoplay=1&mute=1&loop=1&playlist=v1r4XlDyFPU&controls=0&showinfo=0';
 const damdiVideo = 'https://www.youtube.com/embed/mv2dr5egSk4?autoplay=1&mute=1&loop=1&playlist=mv2dr5egSk4';
 const sonoVideo = 'https://www.youtube.com/embed/tA07T3XXp4w?autoplay=1&mute=1&loop=1&playlist=tA07T3XXp4w&controls=0&showinfo=0';
 import cubeImg from '../assets/images/projects/cube.jpg';
 
-export const projects: Project[] = [
+export const projects = [
   {
     id: 1,
     title: 'LG화학 메인 리뉴얼',
@@ -80,7 +78,7 @@ export const projects: Project[] = [
     description: 'React와 TypeScript 기반으로 전환한 리뉴얼 프로젝트로, 퍼블리셔 2명이 참여했습니다. 컴포넌트 단위의 퍼블리싱을 진행하며 React 환경에서의 마크업 경험을 쌓았습니다.',
     tech: ['React', 'TypeScript', 'SCSS', 'GSAP'],
     link: 'https://www.cuberefund.com/',
-    image: cubeImg,
+    image: cubeImg.src,
     background: '#ffffff',
     thumbnailHeight: '5rem',
     problem: '전통적인 jQuery/HTML 방식에서 React 기반의 SPA 렌더링 방식으로 아키텍처가 완전히 전환되는 과도기적 어려움이 있었습니다.',

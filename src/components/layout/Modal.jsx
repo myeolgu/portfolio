@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useModalStore } from '../../store/modalStore';
 
-const Modal: React.FC = () => {
+const Modal = () => {
   const { isOpen, selectedProject, closeModal } = useModalStore();
 
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
+    const handleEsc = (e) => {
       if (e.key === 'Escape') closeModal();
     };
     if (isOpen) {

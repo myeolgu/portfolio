@@ -3,11 +3,7 @@ import Header from './Header';
 import Modal from './Modal';
 import CustomCursor from '../ui/CustomCursor';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <CustomCursor />
