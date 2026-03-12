@@ -29,6 +29,9 @@
   font-weight: 700;
   letter-spacing: normal;
   will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
 
   @include mobile {
