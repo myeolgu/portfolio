@@ -16,7 +16,9 @@ const Header = () => {
   return (
     <header className={`header${scroll ? ' scroll' : ''}`}>
       <div className="logo-box">
-        <h1 className="logo">JU</h1>
+        <h1 className="logo">
+          <a href="/portfolio/" aria-label="홈으로 이동">JU</a>
+        </h1>
       </div>
     </header>
   );

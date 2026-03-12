@@ -367,12 +367,14 @@ const Main = () => {
   }, [currentSection]);
 
   return (
-    <div className="wrap">
+    <>
+      <a href="#main-content" className="skip-link">본문 바로가기</a>
+      <main className="wrap">
       <Head>
         <title>주엽 | 웹 퍼블리셔 포트폴리오</title>
       </Head>
       {/* Hero 섹션 */}
-      <section className="panel intro-section" aria-label="히어로">
+      <section id="main-content" className="panel intro-section" aria-label="히어로">
         <video
           ref={videoRef}
           autoPlay
@@ -526,7 +528,8 @@ const Main = () => {
           </address>
         </div>
       </section>
-    </div>
+      </main>
+    </>
   );
 };
 
