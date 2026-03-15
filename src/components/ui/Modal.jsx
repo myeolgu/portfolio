@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useModalStore } from '../../store/modalStore';
-import { X, ExternalLink, Activity, Wrench, Trophy } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
 
 const Modal = () => {
   const { isOpen, selectedProject, closeModal } = useModalStore();
@@ -35,40 +35,43 @@ const Modal = () => {
         </button>
 
 
-        {/* 메인 콘텐츠 영역 */}
         <div className="modal-content">
           <div className="modal-header">
             <h2 className="modal-title">{selectedProject.title}</h2>
+            {selectedProject.description && (
+              <p className="modal-description" dangerouslySetInnerHTML={{ __html: selectedProject.description }} />
+            )}
+            {selectedProject.tech && (
+              <div className="modal-tech-tags">
+                {selectedProject.tech.map((tag, i) => (
+                  <span key={i} className="tech-tag">{tag}</span>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="modal-body">
             {/* 프로젝트 요약 / 배경 */}
             <section className="insight-section">
-              <h3 className="insight-title">
-                <Activity size={18} /> 배경 및 목표 (The Challenge)
-              </h3>
+              <h3 className="insight-title">배경 및 목표</h3>
               <div className="insight-text-box">
-                <p className="insight-text">{selectedProject.problem}</p>
+                <p className="insight-text" dangerouslySetInnerHTML={{ __html: selectedProject.problem }} />
               </div>
             </section>
 
             {/* 해결 과정 (액션) */}
             <section className="insight-section">
-              <h3 className="insight-title">
-                <Wrench size={18} /> 기술적 의사결정 (Action)
-              </h3>
+              <h3 className="insight-title">기술적 의사결정</h3>
               <div className="insight-text-box">
-                <p className="insight-text">{selectedProject.action}</p>
+                <p className="insight-text" dangerouslySetInnerHTML={{ __html: selectedProject.action }} />
               </div>
             </section>
 
             {/* 비즈니스 임팩트 (결과) */}
             <section className="insight-section">
-              <h3 className="insight-title highlight">
-                <Trophy size={18} /> 비즈니스 임팩트 (Result & Insight)
-              </h3>
+              <h3 className="insight-title highlight">비즈니스 임팩트</h3>
               <div className="insight-text-box highlight">
-                <p className="insight-text">{selectedProject.result}</p>
+                <p className="insight-text" dangerouslySetInnerHTML={{ __html: selectedProject.result }} />
               </div>
             </section>
           </div>
