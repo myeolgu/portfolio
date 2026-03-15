@@ -33,7 +33,7 @@
   animation: modalContainerSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @include mobile {
-    max-height: 90vh;
+    max-height: 80svh;
   }
 }
 
@@ -137,7 +137,7 @@
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
-  
+
   .meta-item {
     font-size: 13px;
     color: #888888;
@@ -215,6 +215,7 @@
 
   &.highlight {
     color: #3b66cf;
+
     svg {
       color: #3b66cf;
     }
