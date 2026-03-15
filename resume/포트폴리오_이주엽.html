@@ -4,267 +4,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이주엽 - 포트폴리오 (Troubleshooting 중심)</title>
+    <title>포트폴리오_이주엽</title>
     <link rel="stylesheet" as="style" crossorigin
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <style>
         :root {
             --primary-color: #333;
-            --text-color: #444;
-            --light-gray: #f5f5f5;
-            --border-color: #e0e0e0;
             --accent-color: #0056b3;
-            --blue-bg: #eef4fb;
+            --bg-light: #f8f9fa;
+            --border-color: #e0e0e0;
+            --gray-text: #666;
         }
 
         body {
             font-family: 'Pretendard', sans-serif;
-            color: var(--text-color);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-        }
-
-        .page {
+            color: #444;
             max-width: 900px;
             margin: 0 auto;
             padding: 40px;
-            box-sizing: border-box;
+            background-color: #fff;
         }
 
         h1 {
             font-size: 28px;
-            text-align: center;
             border-bottom: 2px solid var(--primary-color);
             padding-bottom: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
-        h2 {
+        .intro-section {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        h2.section-title {
             font-size: 22px;
-            color: var(--accent-color);
+            color: var(--primary-color);
             border-left: 5px solid var(--accent-color);
             padding-left: 15px;
-            margin-top: 50px;
+            margin: 50px 0 25px;
+        }
+
+        /* Project Cards */
+        .project-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 60px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--bg-light);
+            padding-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 0;
+        }
+
+        .project-members {
+            font-size: 13px;
+            color: var(--gray-text);
+            background: var(--bg-light);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .project-image {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #f0f0f0;
+        }
+
+        .project-image img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .project-section {
             margin-bottom: 25px;
         }
 
-        .project-meta {
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .project-links {
-            margin-bottom: 20px;
-        }
-
-        .project-links a {
-            display: inline-block;
-            margin-right: 15px;
-            color: var(--accent-color);
-            font-weight: 600;
-            text-decoration: none;
-            border: 1px solid var(--accent-color);
-            padding: 5px 15px;
-            border-radius: 4px;
-        }
-
-        .trouble-shooting {
-            background-color: var(--blue-bg);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border-left: 5px solid var(--accent-color);
-        }
-
-        .trouble-title {
-            font-weight: 700;
+        .project-section h4 {
             font-size: 16px;
-            margin-bottom: 10px;
-            display: block;
-            color: var(--accent-color);
-        }
-
-        .trouble-content { font-size: 14px; }
-
-        .project-img-placeholder {
-            width: 100%;
-            height: 300px;
-            background-color: var(--light-gray);
-            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #999;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-
-        .tech-stack {
-            display: flex;
             gap: 8px;
-            margin-bottom: 15px;
         }
 
-        .tech-stack span {
+        .project-section h4::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+            text-align: justify;
+            word-break: keep-all;
+        }
+
+        .solution-box {
+            margin-bottom: 25px;
+        }
+
+
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
             font-size: 12px;
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 2px 10px;
+            color: #555;
+            background: #eee;
+            padding: 3px 10px;
             border-radius: 4px;
         }
 
-        .key-points {
-            margin: 0;
-            padding-left: 20px;
-            font-size: 15px;
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
 
-        .key-points li { margin-bottom: 8px; }
-
-        @media print { .page { padding: 20px; } h2 { margin-top: 30px; } }
+        /* PDF Export / Print Styles (A4) */
+        @media print {
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+            body {
+                padding: 0;
+                margin: 0;
+                width: 210mm; /* Fixed A4 width */
+                background: #fff;
+            }
+            .project-card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #eee;
+                margin-bottom: 5mm;
+                padding: 15px;
+            }
+            h1 { margin-top: 0; font-size: 24px; }
+            h2.section-title { margin: 15px 0 15px; }
+            .project-image { margin: 10px 0; }
+            .project-image img { max-height: 120mm; object-fit: contain; } /* Limit image height to prevent overflows */
+            .solution-box { 
+                background: none !important; 
+                border: none !important; /* Remove border entirely */
+                padding: 0; /* Remove extra padding since border is gone */
+                margin-bottom: 15px;
+            }
+            .tech-tags { margin-top: 5px; }
+        }
     </style>
 </head>
 
 <body>
-    <div class="page">
-        <h1>PORTFOLIO (Troubleshooting & Core Projects)</h1>
+    <h1>포트폴리오 | 이주엽</h1>
 
-        <!-- CORE 1: AI & AGILITY -->
-        <section>
-            <h2>01. AI 에이전트를 활용한 퍼블리싱 자동화 시스템 설계</h2>
-            <div class="project-meta">2024.01 - 2024.05 | 기여도 100% | 주식회사 이트라이브 (개인 가이드라인 구축)</div>
-            <div class="tech-stack">
-                <span>Claude/Anti-gravity</span>
-                <span>Custom Rules(SKILL.md)</span>
-                <span>Agile Workflow</span>
+    <h2 class="section-title">주요 프로젝트 상세</h2>
+
+    <!-- Project 1: LG -->
+    <div class="project-card">
+        <div class="project-header">
+            <div>
+                <h3 class="project-title">LG화학 채용 사이트 메인 리뉴얼</h3>
+                <div style="font-size: 12px; color: #888; margin-top: 4px;">https://www.lgchem.com/career/index</div>
             </div>
-            
-            <div class="project-img-placeholder">[ AI 에이전트 커스텀 룰 설계 및 마크업 자동 변환 파이프라인 화면 ]</div>
+            <span class="project-members">퍼블리싱 단독 수행</span>
+        </div>
 
-            <ul class="key-points">
-                <li><strong>배경:</strong> 수백 개의 레거시 페이지를 단기 기한 내에 신규 표준 가이드로 전환해야 하는 대규모 고도화 프로젝트 직면.</li>
-                <li><strong>핵심 성과:</strong> AI 에이전트 전용 **퍼블리싱 프롬프트 및 규칙 시스템(Custom Rule)**을 독자 설계하여, 단순 활용을 넘어 **반복 공수의 80% 이상을 자동화**하는 파이프라인 구축.</li>
-            </ul>
+        <div class="project-image">
+            <img src="../src/assets/images/projects/1.png" alt="LG화학 프로젝트 스크린샷" />
+        </div>
 
-            <div class="trouble-shooting">
-                <span class="trouble-title">⚠️ Troubleshooting: AI 결과물의 코드 일관성 및 휴먼 에러 제어</span>
-                <div class="trouble-content">
-                    <strong>[문제]</strong> 일반적인 AI 코드 생성은 프로젝트 고유의 BEM 네이밍이나 공통 모듈 구조를 무시하여 사후 수정 비용이 발생하는 문제 발생.<br>
-                    <strong>[해결]</strong> 프로젝트별 CSS 가이드라인과 컴포넌트 사용 원칙을 명문화한 **Rule 파일(SKILL.md)**을 작성하여 에이전트에 사전 주입함으로써, 코드 일관성을 95% 이상 확보함. 이는 단순 속도를 넘어 팀 전체의 유지보수 품질을 상향 평준화하는 결과를 가져옴.
-                </div>
+        <div class="project-section solution-box">
+            <h4>1. 핵심 과제 및 해결 방안 (Problem & Solution)</h4>
+            <div class="section-content">방문자들에게 강렬한 첫인상을 줄 수 있는 몰입감 있는 메인 페이지를 만드는 것이 목표였습니다. <b>성능과 비주얼의 균형</b>을 맞춘 정교한 인터랙션 구현을 통해 기획 의도를 완벽히 실현하며 비즈니스 가치를 높였습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>2. 설명 (Description)</h4>
+            <div class="section-content">입사 6개월 차에 메인 페이지의 인터랙션을 단독으로 전담한 프로젝트입니다. <b>무거운 영상 대신 SVG Drawing 기법을 직접 제안</b>하여 브랜드 가치를 시각적으로 극대화하는 동시에, 초기 렌더링 속도를 개선하여 사용자 이탈을 방지했습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>3. 기술적 고민 (Technical Challenges)</h4>
+            <div class="section-content">
+                <ul style="padding-left: 20px; margin: 0;">
+                    <li><b>성능 최적화</b>: 고사양 영상 기반 연출을 GSAP과 SVG 코드로 대체하여 브라우저 부하를 획기적으로 절감</li>
+                    <li><b>비주얼 디테일</b>: 브랜드 아이덴티티를 살린 정교한 벡터 애니메이션 구현</li>
+                    <li><b>일정 관리 효율</b>: 운영 업무를 병행하면서도 핵심 마크업과 스크립트를 일주일 내 완수하는 가시적인 성과 달성</li>
+                </ul>
             </div>
-        </section>
-
-        <!-- CORE 2 -->
-        <section>
-            <h2>02. 마케팅 성과 극대화를 위한 성능 최적화</h2>
-            <div class="project-meta">2023.06 - 2023.12 | 기여도 100% | 삼성자산운용 외 마케팅 프로젝트</div>
-            <div class="tech-stack">
-                <span>Next.js</span>
-                <span>Core Web Vitals</span>
-                <span>GA4/GTM</span>
-                <span>SEO</span>
+            <div class="tech-tags">
+                <span class="tech-tag">GSAP</span><span class="tech-tag">SVG Animation</span><span
+                    class="tech-tag">SCSS</span><span class="tech-tag">Vanilla JS</span>
             </div>
+        </div>
+    </div>
 
-            <div class="project-links">
-                <a href="https://myeolgu.github.io/portfolio/" target="_blank">웹 포트폴리오(Interaction 확인)</a>
+    <!-- Project 2: Senior Residence -->
+    <div class="project-card">
+        <div class="project-header">
+            <div>
+                <h3 class="project-title">시니어 레지던스 브랜드 사이트 구축</h3>
+                <div style="font-size: 12px; color: #888; margin-top: 4px;">https://www.lottesrc.com/vl</div>
             </div>
+            <span class="project-members">퍼블리싱 3명 (스크립트 전담)</span>
+        </div>
 
-            <ul class="key-points">
-                <li><strong>배경:</strong> 광고 유입 대비 높은 초기 이탈률 개선 및 정교한 사용자 데이터 추적 세팅 필요.</li>
-                <li><strong>핵심 성과:</strong> **LCP(초기 로딩 속도) 개편 전 5.2s → 개편 후 1.8s**로 단축. 이탈률 약 30% 방어.</li>
-            </ul>
+        <div class="project-image">
+            <img src="../src/assets/images/projects/2.png" alt="시니어 레지던스 프로젝트 스크린샷" />
+        </div>
 
-            <div class="trouble-shooting">
-                <span class="trouble-title">⚠️ Troubleshooting: 높은 페이지 이탈률과 로딩 지연 해결</span>
-                <div class="trouble-content">
-                    <strong>[문제]</strong> 고화질 이미지와 복잡한 인터랙션으로 인해 모바일 환경에서의 초기 로딩 지연이 심각했고, 이는 GA 데이터상 높은 이탈률(Bounce Rate)로 이어짐.<br>
-                    <strong>[해결]</strong> Next.js의 Image Optimization을 적용하고, 폰트 서브셋 구성 및 불필요한 JS 라이브러리 제거를 수행함. 또한 GTM을 통해 이탈 지점을 추적하여 UI 배치를 수정한 결과, 사용자 체류 시간이 기존 대비 45% 증가하는 비즈니스 임팩트를 창출함.
-                </div>
+        <div class="project-section solution-box">
+            <h4>1. 핵심 과제 및 해결 방안 (Problem & Solution)</h4>
+            <div class="section-content">고급스러운 브랜드 가치를 웹에서 재현하면서 실버 세대도 불편함 없는 최적의 시각적 경험을 제공하는 것이 목표였습니다. 가독성과 접근성을
+                최우선으로 고려한 UI를 통해 성공적으로 구축했습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>2. 설명 (Description)</h4>
+            <div class="section-content">시니어 주거 시설의 브랜드 사이트입니다. 퍼블리싱 스크립트 전반을 단독으로 전담하여 바닐라 JS로 세밀한 인터랙션을 구현했고 웹 접근성
+                가이드라인을 철저히 준수했습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>3. 기술적 고민 (Technical Challenges)</h4>
+            <div class="section-content">모든 UI 스크립트를 단독 전담하여 바닐라 JS로 구현했습니다. 어떤 기기에서도 화면이 깨지지 않도록 SCSS로 탄탄한 반응형 구조를 잡고
+                폰트와 색상 대비를 실버 세대에 맞춰 세밀하게 조정했습니다.</div>
+            <div class="tech-tags">
+                <span class="tech-tag">HTML5</span><span class="tech-tag">SCSS</span><span
+                    class="tech-tag">JavaScript</span><span class="tech-tag">웹 접근성</span>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- CORE 2: LG CHEM (SOLO) -->
-        <section>
-            <h2>02. 브랜드 가치를 높이는 고성능 인터랙션 UI</h2>
-            <div class="project-meta">2023.01 - 2023.07 | 기여도 100% | LG화학 채용 사이트 메인 리뉴얼</div>
-            <div class="tech-stack">
-                <span>GSAP</span>
-                <span>SVG Animation</span>
-                <span>SCSS</span>
-                <span>Vanilla JS</span>
+    <!-- Project 3: Samsung -->
+    <div class="project-card">
+        <div class="project-header">
+            <div>
+                <h3 class="project-title">삼성자산운용 ETF 펀드솔루션 리뉴얼</h3>
+                <div style="font-size: 12px; color: #888; margin-top: 4px;">https://m.funetf.co.kr/</div>
             </div>
+            <span class="project-members">퍼블리싱 4명 (공통 라이브러리 개발)</span>
+        </div>
 
-            <div class="project-links">
-                <a href="https://www.lgchem.com/career/index" target="_blank">사이트 방문하기</a>
+        <div class="project-image">
+            <img src="../src/assets/images/projects/3.png" alt="삼성자산운용 프로젝트 스크린샷" />
+        </div>
+
+        <div class="project-section solution-box">
+            <h4>1. 핵심 과제 및 해결 방안 (Problem & Solution)</h4>
+            <div class="section-content">방대한 금융 데이터를 사용자에게 명확하게 전달하는 플랫폼 구축을 목표로 했습니다. <b>컴포넌트 중심의 아키텍처 설계</b>를 통해 코드 파편화를 방지하고, 전체 프로젝트의 유지보수 효율을 30% 이상 향상시켰습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>2. 설명 (Description)</h4>
+            <div class="section-content"><b>바닐라 JS 기반의 공통 UI 라이브러리</b>를 구축하여 대규모 프로젝트의 기술 표준을 수립했습니다. 모달, 셀렉트 박스 등 핵심 컴포넌트를 모듈화하여 100여 개 이상의 페이지에서 일관된 사용자 경험(UX)을 제공했습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>3. 기술적 고민 (Technical Challenges)</h4>
+            <div class="section-content">
+                <ul style="padding-left: 20px; margin: 0;">
+                    <li><b>표준화된 개발 환경</b>: 대규모 프로젝트 진행 시 발생하는 작업자별 코드 파편화 문제를 UI 라이브러리화를 통해 해결</li>
+                    <li><b>아키텍처 설계</b>: 재사용성과 확장성을 고려한 Vanilla JS 기반 독립형 컴포넌트 구조 설계</li>
+                    <li><b>품질 정교화</b>: 탄탄한 마크업 설계를 바탕으로 최종 검수 단계에서 결함 발생 제로 달성</li>
+                </ul>
             </div>
-
-            <ul class="key-points">
-                <li><strong>배경:</strong> 커리어 5~6개월 차에 삼성자산운용 운영과 병행하며, 단 일주일 내에 메인 페이지 고난도 인터랙션 완수 요구됨 (단독 처리).</li>
-                <li><strong>핵심 성과:</strong> **GSAP 및 SVG Path 애니메이션** 최초 도입. 촉박한 일정 속에서도 리서치와 구현을 병행하며 픽셀 단위의 모션을 완벽 구현.</li>
-            </ul>
-
-            <div class="trouble-shooting">
-                <span class="trouble-title">⚠️ Troubleshooting: 생소한 기술 도전과 극한의 일정 관리</span>
-                <div class="trouble-content">
-                    <strong>[문제]</strong> 기업 아이덴티티를 담은 정교한 인터랙션이 필수적이었으나, 생소했던 기술적 한계와 타 프로젝트 운영 병행이라는 리소스 압박이 있었음.<br>
-                    <strong>[해결]</strong> 공식 문서를 통한 **GSAP** 조기 독학 및 SVG Path 드로잉 기법을 직접 제안/구현함. 멀티태스킹 능력을 발휘해 기한 내 성공적으로 마감하며, 신입 이상의 돌파력과 결과물 품질을 인정받음.
-                </div>
+            <div class="tech-tags">
+                <span class="tech-tag">Vanilla JS</span><span class="tech-tag">UI Library</span><span
+                    class="tech-tag">SCSS</span><span class="tech-tag">Grid/Flex</span>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <!-- CORE 3: SAMSUNG & VL (LEADERSHIP) -->
-        <section>
-            <h2>03. 대규모 플랫폼 아키텍처 및 공통 컴포넌트 설계</h2>
-            <div class="project-meta">2023.01 - 2023.12 | 삼성자산운용 펀드솔루션 및 롯데 VL 시니어 레지던스</div>
-            <div class="tech-stack">
-                <span>CSS Grid/Flexbox</span>
-                <span>WCAG 2.1</span>
-                <span>Component Design</span>
+    <!-- Project 4: Cube -->
+    <div class="project-card">
+        <div class="project-header">
+            <div>
+                <h3 class="project-title">큐브 리펀드 리뉴얼</h3>
+                <div style="font-size: 12px; color: #888; margin-top: 4px;">https://www.cuberefund.com/</div>
             </div>
+            <span class="project-members">퍼블리싱 2명 (디자인 시스템 설계)</span>
+        </div>
 
-            <ul class="key-points">
-                <li><strong>배경:</strong> 방대한 금융 데이터의 가독성 확보(삼성) 및 시니어 타겟의 웹 접근성 극대화(롯데 VL)가 핵심 과제.</li>
-                <li><strong>핵심 성과:</strong> 전사 공통 컴포넌트 라이브러리 및 반응형 가이드라인을 수립하여 작업자 간 품질 파편화를 방지하고 유지보수 효율 증대.</li>
-            </ul>
+        <div class="project-image">
+            <img src="../src/assets/images/projects/4.png" alt="큐브 리펀드 프로젝트 스크린샷" />
+        </div>
 
-            <div class="trouble-shooting">
-                <span class="trouble-title">⚠️ Troubleshooting: 다인 협업 환경에서의 코드 일관성 확보</span>
-                <div class="trouble-content">
-                    <strong>[문제]</strong> 다수의 작업자가 투입된 환경에서 스타일 충돌과 불필요한 중복 코드가 프로젝트 안정성을 해치는 리스크 직면.<br>
-                    <strong>[해결]</strong> **SCSS 변수 및 믹스인 체계**를 직접 설계하여 가독성 높은 공통 가이드를 배포함. 삼성 프로젝트에서는 결함 제로(Zero)를, 롯데 VL에서는 **웹 접근성 우수 마크 획득**에 기여하며 전문성을 입증함.
-                </div>
+        <div class="project-section solution-box">
+            <h4>1. 핵심 과제 및 해결 방안 (Problem & Solution)</h4>
+            <div class="section-content">기존 레거시 코드를 최신 웹 환경으로 전환하여 서비스 성장의 기반을 마련했습니다. <b>아토믹 디자인(Atomic Design) 패턴</b>과 Radix UI를 결합해 확장성 있는 디자인 시스템을 구축하며 시스템의 지속 가능성을 입증했습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>2. 설명 (Description)</h4>
+            <div class="section-content">React/TypeScript 환경에서 컴포넌트 단위의 작업 시스템을 성공적으로 안착시킨 프로젝트입니다. 이를 통해 <b>수정 요청에 대한 대응 속도를 40% 이상 단축</b>하며 운영 효율성을 극대화했습니다.</div>
+        </div>
+
+        <div class="project-section">
+            <h4>3. 기술적 고민 (Technical Challenges)</h4>
+            <div class="section-content">
+                <ul style="padding-left: 20px; margin: 0;">
+                    <li><b>Design System 설계</b>: 아토믹 패턴을 적용하여 재사용성이 극대화된 컴포넌트 아키텍처 구축</li>
+                    <li><b>접근성 및 안정성</b>: Radix UI를 도입하여 Headless UI 기반의 웹 표준 및 접근성이 강화된 컴포넌트 배포</li>
+                    <li><b>DX(Developer Experience)</b>: 스타일 독립성이 보장된 구조를 통해 후속 작업자의 개발 효율 지원</li>
+                </ul>
             </div>
-        </section>
-
-        <!-- CORE 4: CUBE REFUND (MODERN TECH) -->
-        <section>
-            <h2>04. 현대적 프론트엔드 생태계로의 전환 및 최적화</h2>
-            <div class="project-meta">2022.06 - 2022.12 | 큐브 리펀드 리뉴얼 구축</div>
-            <div class="tech-stack">
-                <span>React</span>
-                <span>TypeScript</span>
-                <span>SCSS Module</span>
+            <div class="tech-tags">
+                <span class="tech-tag">React</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Radix
+                    UI</span><span class="tech-tag">SCSS Module</span>
             </div>
+        </div>
+    </div>
 
-            <ul class="key-points">
-                <li><strong>배경:</strong> 레거시(jQuery) 환경에서 React/TypeScript 기반의 SPA 아키텍처로 전환하며 퍼블리싱 플로우 고도화 필요.</li>
-                <li><strong>핵심 성과:</strong> 컴포넌트 기반 UI 설계와 스타일 캡슐화(SCSS Module)를 통해 협업 프로세스 혁신 및 사후 관리 효율 40% 이상 향상.</li>
-            </ul>
-
-            <div class="trouble-shooting">
-                <span class="trouble-title">⚠️ Troubleshooting: 컴포넌트 기반 아키텍처의 스타일 격리</span>
-                <div class="trouble-content">
-                    <strong>[문제]</strong> SPA 환경에서 전역 스타일 오염 문제와 상태(State)에 따른 UI 전환 처리가 기존 방식으로는 한계에 부딪힘.<br>
-                    <strong>[해결]</strong> SCSS Module을 적극 활용해 스타일 간섭을 원천 차단하고, 아토믹 디자인 패턴을 적용해 재사용 가능한 디자인 시스템의 기반을 마련함. 프론트엔드 개발자와의 긴밀한 싱크를 통해 효율적인 개발 환경을 구축함.
-                </div>
-            </div>
-        </section>
-
-        <p style="text-align: center; color: #888; font-size: 13px; margin-top: 60px;">상기 프로젝트 외 실무 코드 및 상세 GitHub 리포지토리는 웹 포트폴리오를 통해 확인 가능합니다.</p>
+    <div
+        style="text-align: center; margin-top: 50px; padding: 20px; color: #888; font-size: 13px; border-top: 1px solid #eee;">
+        © 2026 이주엽 | 본 포트폴리오는 실무 프로젝트 경험을 바탕으로 작성되었습니다.
     </div>
 </body>
 

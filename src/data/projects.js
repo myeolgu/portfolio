@@ -2,8 +2,6 @@
 const lgchemImg = '/portfolio/videos/lg_intro.mp4';
 const lotteImg = '/portfolio/videos/lotte_intro.mp4';
 const samsungVideo = 'https://www.youtube.com/embed/v1r4XlDyFPU?autoplay=1&mute=1&loop=1&playlist=v1r4XlDyFPU&controls=0&showinfo=0';
-const damdiVideo = 'https://www.youtube.com/embed/mv2dr5egSk4?autoplay=1&mute=1&loop=1&playlist=mv2dr5egSk4';
-const sonoVideo = 'https://www.youtube.com/embed/tA07T3XXp4w?autoplay=1&mute=1&loop=1&playlist=tA07T3XXp4w&controls=0&showinfo=0';
 import cubeImg from '../assets/images/projects/cube.jpg';
 
 export const projects = [
