@@ -485,7 +485,7 @@ const Main = () => {
                 >
                   <h3 className="work-project-title">{project.title}</h3>
                   <div className="work-description-box">
-                    <p>{project.description}</p>
+                    <p dangerouslySetInnerHTML={{ __html: project.description }} />
                   </div>
                   {project.tech && project.tech.length > 0 && (
                     <ul className="work-tech-list">

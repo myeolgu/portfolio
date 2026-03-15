@@ -36,7 +36,7 @@ const Modal = () => {
           </button>
         </div>
         <div className="modal-content">
-          <p className="modal-description">{selectedProject.description}</p>
+          <p className="modal-description" dangerouslySetInnerHTML={{ __html: selectedProject.description }} />
           {selectedProject.tech && (
             <div className="modal-tech">
               <h3></h3>
