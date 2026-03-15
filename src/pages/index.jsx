@@ -518,7 +518,14 @@ const Main = () => {
         {/* 연락처 섹션 */}
         <section className="panel contact-section" aria-label="연락처">
           <div className="contact-container">
-            <h2 className="contact-title">{splitText('똑똑, 함께 성장할 파트너를 찾으시나요?')}</h2>
+            <h2 className="contact-title">
+              <span className="pc-only">{splitText('똑똑, 함께 성장할 파트너를 찾으시나요?')}</span>
+              <span className="mo-only">
+                {splitText('똑똑, 함께 성장할')}
+                <br />
+                {splitText('파트너를 찾으시나요?')}
+              </span>
+            </h2>
 
             <div className="contact-content">
               <p className="contact-desc">
