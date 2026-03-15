@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이주엽 - 종합 이력서 및 경력기술서</title>
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root {
+            --primary-color: #333;
+            --text-color: #444;
+            --light-gray: #f5f5f5;
+            --border-color: #e0e0e0;
+            --accent-color: #0056b3;
+            --red-accent: #d32f2f;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 { color: var(--primary-color); }
+
+        h1 {
+            font-size: 26px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 19px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        .header-profile {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .profile-text { flex: 1; }
+        .profile-name { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+        .profile-info { font-size: 14px; display: grid; grid-template-columns: 80px 1fr 80px 1fr; gap: 8px; }
+
+        .tech-detailed { margin-bottom: 25px; }
+        .tech-category { margin-bottom: 15px; }
+        .tech-category-title { font-weight: 700; font-size: 15px; color: var(--accent-color); margin-bottom: 5px; display: block; }
+        .tech-desc { font-size: 14px; display: block; margin-bottom: 3px; }
+
+        .career-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .career-table th, .career-table td { padding: 12px 10px; border-bottom: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+        .career-table th { width: 160px; color: #666; font-weight: 600; }
+
+        .proj-box { margin-bottom: 20px; }
+        .proj-title { font-weight: 700; font-size: 16px; margin-bottom: 5px; color: var(--primary-color); }
+        .proj-summary { list-style: square; padding-left: 20px; margin: 0; }
+        .proj-summary li { margin-bottom: 5px; }
+        .highlight { color: var(--red-accent); font-weight: 600; }
+
+        .trinity-value { margin-bottom: 25px; }
+        .trinity-title { font-weight: 700; font-size: 16px; color: var(--accent-color); background: var(--light-gray); padding: 8px 12px; border-radius: 4px; display: block; margin-bottom: 10px; }
+        .trinity-content { font-size: 15px; text-align: justify; }
+
+        @media print { .page { padding: 20px; } .header-profile { border: none; padding: 0; } }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <h1>비즈니스 성과를 창출하는 Growth Tech 개발자, 이주엽입니다.</h1>
+
+        <div class="header-profile">
+            <div class="profile-text">
+                <div class="profile-name">이주엽 <span style="font-weight: 400; font-size: 14px; color: #666;">(1995년생, 만 30세)</span></div>
+                <div class="profile-info">
+                    <strong>연락처</strong> 010-5917-7297
+                    <strong>이메일</strong> juyeop198@naver.com
+                    <strong>주소</strong> 서울시 관악구 신림동
+                    <strong>경력</strong> 총 3년 2개월 (재직 중)
+                </div>
+            </div>
+        </div>
+
+        <h2>Technical Skills (Detailed Mastery)</h2>
+        <div class="tech-detailed">
+            <div class="tech-category">
+                <span class="tech-category-title">Frontend Framework & Logic</span>
+                <span class="tech-desc"><strong>React / Next.js:</strong> 컴포넌트 재사용성을 고려한 원자적 디자인 패턴(Atomic Design) 설계 및 서버 사이드 렌더링(SSR) 최적화 경험.</span>
+                <span class="tech-desc"><strong>JavaScript (ES6+):</strong> 비동기 처리 및 DOM 인터랙션 최적화, 최신 문법을 활용한 가독성 높은 코드 작성.</span>
+            </div>
+            <div class="tech-category">
+                <span class="tech-category-title">Marketing & Performance Optimization</span>
+                <span class="tech-desc"><strong>GA4 / GTM:</strong> 사용자 행동 트래킹을 위한 커스텀 이벤트 설계 및 데이터 수집 환경 구축 실무.</span>
+                <span class="tech-desc"><strong>SEO / Web Vitals:</strong> 검색 엔진 최적화 마크업 및 Core Web Vitals(LCP, CLS 등) 지표 개선을 통한 이탈률 감소 성과.</span>
+                <span class="tech-desc"><strong>Interaction:</strong> GSAP 및 Lottie를 활용한 고성능 애니메이션 구현 및 디자이너와 원활한 협업.</span>
+            </div>
+            <div class="tech-category">
+                <span class="tech-category-title">AI Tool Mastery (Next-Gen Productivity)</span>
+                <span class="tech-desc"><strong>AI Coding Tools:</strong> Claude, Anti-gravity 등 AI Agent를 워크플로우에 도입, 커스텀 Rule 설계를 통해 반복 공수 80% 이상 단축 및 생산성 혁신.</span>
+            </div>
+        </div>
+
+        <h2>Career History</h2>
+        <table class="career-table">
+            <tr>
+                <th>2023.01 ~ 현재<br>주식회사 이트라이브</th>
+                <td>
+                    <div class="proj-box">
+                        <div class="proj-title">Major Brand & Marketing (핵심 성과)</div>
+                        <ul class="proj-summary">
+                            <li><strong>LG화학 메인 및 Career 리뉴얼:</strong> GSAP 최초 도입으로 동적인 인터랙션 구현 및 직무 전문성 확보.</li>
+                            <li><strong>동아제약 OTC 브랜드 페이지 구축:</strong> 멜라토닝크림 등 신제품 페이지에 <strong>Lottie 애니메이션</strong> 적용, 이목 집중 및 사용자 잔류 시간 증대.</li>
+                            <li><strong>팔도 비빔면 등 이벤트 페이지:</strong> 마케팅 캠페인 최적화를 위한 고성능 랜딩 페이지 다수 구축.</li>
+                        </ul>
+                    </div>
+
+                    <div class="proj-box">
+                        <div class="proj-title">Finance & Platform (안정성 및 리뉴얼)</div>
+                        <ul class="proj-summary">
+                            <li><strong>삼성자산운용 ETF 및 펀드솔루션 리뉴얼/운영:</strong> 대규모 금융 플랫폼의 UI 고도화 및 안정적인 유지보수.</li>
+                            <li><strong>큐브 리펀드(세금 환급) 리뉴얼:</strong> 서비스 목표에 부합하는 사용성 개선 및 리팩토링.</li>
+                            <li><strong>[주도] 사내 Git 마이그레이션:</strong> 개발 프로세스 효율화를 위한 시스템 이전 작업 총괄.</li>
+                        </ul>
+                    </div>
+
+                    <div class="proj-box">
+                        <div class="proj-title">App & Advanced Platforms</div>
+                        <ul class="proj-summary">
+                            <li><strong>래미안 홈닉 / 롯데 담디 APP:</strong> 스마트홈 및 시니어 케어 플랫폼의 앱 UI 구축 및 고도화.</li>
+                            <li><strong>고급 시니어 레지던스 / 대명 아임 레디:</strong> 다양한 도메인의 신규 웹사이트 구축 및 유지보수.</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div style="page-break-before: always; height: 1px;"></div>
+
+        <h2>자기소개서 (Trinity Values)</h2>
+        <div class="trinity-value">
+            <span class="trinity-title">Agility (민첩성): 새로운 도구로 증명하는 혁신적 속도</span>
+            <div class="trinity-content">
+                가장 민첩한 배움이 가장 높은 생산성을 만든다고 믿습니다. 저는 Claude CLI와 Anti-gravity 같은 최신 AI 에이전트를 실무의 핵심 파트너로 도입했습니다. 단순 활용에 그치지 않고 개발 가이드라인(Rule)을 직접 설계하여 학습시킴으로써, 대규모 레거시 마크업 변환 작업에서 반복 공수를 80% 이상 단축했습니다. 확보한 시간은 기술적 성취도가 높은 GSAP 애니메이션이나 성능 최적화에 투자하며, 'Speed with Impact'를 실현해 왔습니다.
+            </div>
+        </div>
+
+        <div class="trinity-value">
+            <span class="trinity-title">Customer Centric (고객 중심): 데이터로 이탈률을 방어하는 개발자</span>
+            <div class="trinity-content">
+                사용자의 이탈을 막는 것은 화려한 디자인 이전에 '정교한 기술적 배려'에서 시작됩니다. 마케팅 페이지에서 초기 로딩 속도(LCP)가 사용자 이탈률에 미치는 영향을 직접 체감하며, 이미지 최적화 및 렌더링 효율화를 통해 지표를 2.5초 이내로 개선했습니다. 또한 GA4/GTM을 직접 세팅하여 사용자의 행동 데이터를 수집하고, 이를 바탕으로 UI 수정을 제안하여 실제 마케팅 리드 확보율을 높인 경험이 있습니다.
+            </div>
+        </div>
+
+        <div class="trinity-value">
+            <span class="trinity-title">Ownership (주도성): 주어진 태스크를 넘어 시스템을 개선하는 힘</span>
+            <div class="trinity-content">
+                저는 주어진 코드만 작성하지 않습니다. 사내 개발 문화의 효율성을 위해 Git 마이그레이션 작업을 주도적으로 제안하고 완수한 바 있으며, 협업 효율을 높이기 위해 디자이너와의 애니메이션 소통 프로세스를 Lottie 기반으로 표준화하기도 했습니다. 이러한 주도성을 인정받아 입사 1년 만에 사내 우수사원에 선정되었으며, 메가존클라우드에서도 스스로 문제를 찾아내고 해결책을 제시하는 '스스로 동기 부여되는 개발자'가 되겠습니다.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

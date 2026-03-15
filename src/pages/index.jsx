@@ -30,7 +30,7 @@ const Main = () => {
   useEffect(() => {
     // 최초 브라우저 렌더링 시점에만 값을 가져옴 (SSR 회피)
     setIsMobile(window.innerWidth <= 1023);
-    
+
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1023);
     };
@@ -332,8 +332,8 @@ const Main = () => {
     const sectionTextMap = {
       0: [0, 1, 2], // Hero 섹션의 3줄
       1: [3],       // About 섹션 "About Me"
-      2: [4],       // work 섹션 타이틀
-      3: [5],       // contact 섹션 타이틀
+      2: [],        // work 섹션 (현재 타이틀 splitText 없음)
+      3: [4],       // contact 섹션 타이틀
     };
 
     const groupIndices = sectionTextMap[currentSection];
@@ -370,164 +370,176 @@ const Main = () => {
     <>
       <a href="#main-content" className="skip-link">본문 바로가기</a>
       <main className="wrap">
-      <Head>
-        <title>주엽 | 웹 퍼블리셔 포트폴리오</title>
-      </Head>
-      {/* Hero 섹션 */}
-      <section id="main-content" className="panel intro-section" aria-label="히어로">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="about-video"
-          aria-label="배경 영상"
-        >
-          <source src="/portfolio/videos/video.mp4" type="video/mp4" />
-        </video>
+        <Head>
+          <title>주엽 | 웹 퍼블리셔 포트폴리오</title>
+        </Head>
+        {/* Hero 섹션 */}
+        <section id="main-content" className="panel intro-section" aria-label="히어로">
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="about-video"
+            aria-label="배경 영상"
+          >
+            <source src="/portfolio/videos/video.mp4" type="video/mp4" />
+          </video>
 
-        {/* Hero 텍스트 오버레이 */}
-        <div className="hero-overlay">
-          <h2 className="hero-title">
-            <span className="text">{splitText('마크업을 넘어,')}</span>
-            <span className="text">{splitText('비즈니스 임팩트를 창출하는')}</span>
-            <span className="text">{splitText('Growth Tech 퍼블리셔')}</span>
-          </h2>
-          <p className="hero-sub">UI 개발 · GSAP 인터랙션 · Core Web Vitals · SEO</p>
-        </div>
-
-        {/* 스크롤 인디케이터 */}
-        <div className="scroll-indicator">
-          <span className="scroll-text">Scroll</span>
-          <span className="scroll-line"></span>
-        </div>
-      </section>
-
-      {/* 소개 섹션 */}
-      <section className="panel about-section" aria-label="소개">
-        <div className="about-container">
-          <h2 className="about-heading">{splitText('About Me')}</h2>
-
-          <p className="about-description">
-            3년간 대규모 웹 플랫폼과 마케팅 프로젝트의 UI 개발을 리드하며, 웹의 첫 페이지가 가지는 막대한 비즈니스 가치를 체득했습니다. 시맨틱 마크업과 픽셀 퍼펙트를 기본으로, Core Web Vitals 최적화와 SEO 아키텍처 설계를 통해 서비스 오가닉 유입률을 극대화합니다.
-            <br /><br />
-            최근에는 React/Next.js 기반의 컴포넌트 개발 환경뿐만 아니라, AI Coding Agent를 실무에 도입하여 기존 대비 80% 이상의 생산성 혁신을 이루어내고 있습니다. 단순한 View 구성을 넘어, GA4/GTM 데이터 트래킹 및 파이프라인 자동화까지 고민하는 '완성에 초점을 맞춘' 퍼포먼스 전문가입니다.
-          </p>
-
-          {/* 핵심 스킬 뱃지 */}
-          <div className="about-skills">
-            {['HTML5 / CSS3', 'SCSS', 'JavaScript', 'React', 'Next.js', 'GSAP', 'Git', 'SEO', 'GA4 / GTM', 'AI Agent'].map((skill, i) => (
-              <span key={i} className="skill-badge">{skill}</span>
-            ))}
+          {/* Hero 텍스트 오버레이 */}
+          <div className="hero-overlay">
+            <h2 className="hero-title">
+              <span className="text">{splitText('마크업을 넘어,')}</span>
+              <span className="text">{splitText('사용자 경험에 집중하는')}</span>
+              <span className="text">{splitText('디테일이 강한 퍼블리셔')}</span>
+            </h2>
+            <p className="hero-sub">UI 개발 · GSAP 인터랙션 · Core Web Vitals · SEO</p>
           </div>
 
-        </div>
-      </section>
+          {/* 스크롤 인디케이터 */}
+          <div className="scroll-indicator">
+            <span className="scroll-text">Scroll</span>
+            <span className="scroll-line"></span>
+          </div>
+        </section>
 
-      {/* 작업 섹션 */}
-      <section className="panel work-section" aria-label="프로젝트">
-        <div className="work-container">
-          {/* 왼쪽: 이미지 슬라이더 영역 */}
-          <div
-            className="work-image-area"
-            ref={workImageAreaRef}
-            role="region"
-            aria-label={`프로젝트 슬라이더, ${currentProject + 1}/${totalProjects}`}
-            aria-live="polite"
-          >
-            <div className="work-image-slider" ref={workListRef}>
+        {/* 소개 섹션 */}
+        <section className="panel about-section" aria-label="소개">
+          <div className="about-container">
+            <h2 className="about-heading">{splitText('About Me')}</h2>
+
+            <p className="about-description">
+              3년간 대규모 플랫폼과 마케팅 프로젝트의 UI를 책임지며, 사용자에게 가장 먼저 닿는 '첫 페이지'의 중요성을 현장에서 배웠습니다. 픽셀 단위의 정교함은 기본으로 하되, 단순 마크업을 넘어 검색 엔진 최적화와 웹 성능 관리를 통해 실질적인 사용자 유입을 개선하는 데 집중합니다.
+              <br /><br />
+              특히 최신 AI 도구를 실무 워크플로우에 적극 도입하여 업무 효율을 혁신하고 있습니다. 단순히 도구에 의존하기보다, 프로젝트의 흐름에 최적화된 설계와 가이드를 통해 반복적인 구현 시간을 단축하고, 그렇게 확보한 시간을 UI의 완성도와 사용자 데이터 분석에 투자하여 더 깊이 있는 고민을 담아내는 '퍼포먼스 전문가'를 지향합니다.
+            </p>
+
+            {/* 핵심 스킬 뱃지 */}
+            <div className="about-skills">
+              {['HTML5 / CSS3', 'SCSS', 'JavaScript', 'React', 'Next.js', 'GSAP', 'Git', 'SEO', 'GA4 / GTM', 'AI Agent'].map((skill, i) => (
+                <span key={i} className="skill-badge">{skill}</span>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* 작업 섹션 */}
+        <section className="panel work-section" aria-label="프로젝트">
+          <div className="work-container">
+            {/* 왼쪽: 이미지 슬라이더 영역 */}
+            <div
+              className="work-image-area"
+              ref={workImageAreaRef}
+              role="region"
+              aria-label={`프로젝트 슬라이더, ${currentProject + 1}/${totalProjects}`}
+              aria-live="polite"
+            >
+              <div className="work-image-slider" ref={workListRef}>
+                {projects.map((project, index) => (
+                  <div
+                    key={project.id}
+                    className="work-image-slide"
+                    aria-hidden={currentProject !== index}
+                  >
+                    {project.image && (
+                      project.image.includes('youtube.com') ? (
+                        <iframe
+                          src={project.image}
+                          title={project.title}
+                          className="work-thumbnail"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerPolicy="strict-origin-when-cross-origin"
+                          allowFullScreen
+                        />
+                      ) : project.image.endsWith('.mp4') ? (
+                        <video
+                          src={project.image}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="work-thumbnail"
+                          aria-label={`${project.title} 프로젝트 영상`}
+                        />
+                      ) : (
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="work-thumbnail"
+                        />
+                      )
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 오른쪽: 텍스트 영역 (페이드 전환) */}
+            <div className="work-info-area">
               {projects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="work-image-slide"
-                  aria-hidden={currentProject !== index}
+                  className={`work-info-content ${currentProject === index ? 'active' : ''}`}
                 >
-                  {project.image && (
-                    project.image.includes('youtube.com') ? (
-                      <iframe
-                        src={project.image}
-                        title={project.title}
-                        className="work-thumbnail"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                      />
-                    ) : project.image.endsWith('.mp4') ? (
-                      <video
-                        src={project.image}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="work-thumbnail"
-                        aria-label={`${project.title} 프로젝트 영상`}
-                      />
-                    ) : (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="work-thumbnail"
-                      />
-                    )
+                  <h3 className="work-project-title">{project.title}</h3>
+                  <div className="work-description-box">
+                    <p>{project.description}</p>
+                  </div>
+                  {project.tech && project.tech.length > 0 && (
+                    <ul className="work-tech-list">
+                      {project.tech.map((tech, techIndex) => (
+                        <li key={techIndex}>{tech}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {project.link && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        useModalStore.getState().openModal(project);
+                      }}
+                      className="work-link"
+                      aria-label={`${project.title} 자세히 보기`}
+                    >
+                      자세히 보기
+                      <i className="ico ico-arrow" aria-hidden="true"></i>
+                    </button>
                   )}
                 </div>
               ))}
             </div>
           </div>
+        </section>
 
-          {/* 오른쪽: 텍스트 영역 (페이드 전환) */}
-          <div className="work-info-area">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`work-info-content ${currentProject === index ? 'active' : ''}`}
-              >
-                <h3 className="work-project-title">{project.title}</h3>
-                <div className="work-description-box">
-                  <p>{project.description}</p>
-                </div>
-                {project.tech && project.tech.length > 0 && (
-                  <ul className="work-tech-list">
-                    {project.tech.map((tech, techIndex) => (
-                      <li key={techIndex}>{tech}</li>
-                    ))}
-                  </ul>
-                )}
-                {project.link && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      useModalStore.getState().openModal(project);
-                    }}
-                    className="work-link"
-                    aria-label={`${project.title} 자세히 보기`}
-                  >
-                    자세히 보기
-                    <i className="ico ico-arrow" aria-hidden="true"></i>
-                  </button>
-                )}
+        {/* 연락처 섹션 */}
+        <section className="panel contact-section" aria-label="연락처">
+          <div className="contact-container">
+            <h2 className="contact-title">{splitText('똑똑, 함께 성장할 파트너를 찾으시나요?')}</h2>
+
+            <div className="contact-content">
+              <p className="contact-desc">
+                역량과 경험을 갖춘 웹 퍼블리셔를 찾고 계신가요? <br />
+                프로젝트 합류 제안이나 기술적인 대화, 혹은 가벼운 커피챗도 모두 환영입니다. <br />
+                보내주신 소중한 메시지에는 정성껏 답변 드릴게요.
+              </p>
+
+              <div className="contact-actions">
+                <a href="mailto:juyeop198@naver.com" className="btn-contact">
+                  이메일 보내기
+                  <i className="ico ico-mail" aria-hidden="true"></i>
+                </a>
               </div>
-            ))}
+
+              <address className="contact-info">
+                <a href="mailto:juyeop198@naver.com" className="contact-item">juyeop198@naver.com</a>
+                <span className="contact-divider"></span>
+                <a href="tel:010-5917-7297" className="contact-item">010-5917-7297</a>
+              </address>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* 연락처 섹션 */}
-      <section className="panel contact-section" aria-label="연락처">
-        <div className="contact-container">
-          <h2 className="contact-title">{splitText('함께 일할 웹 퍼블리셔를 찾고 계신가요?')}</h2>
-
-          <address className="contact-info">
-            <a href="mailto:juyeop198@naver.com" className="contact-email">
-              Email : juyeop198@naver.com
-            </a>
-            <a href="tel:010-5917-7297" className="contact-phone">
-              Tel : 010-5917-7297
-            </a>
-          </address>
-        </div>
-      </section>
+        </section>
       </main>
     </>
   );
