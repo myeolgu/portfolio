@@ -41,6 +41,10 @@ const Modal = () => {
             {selectedProject.description && (
               <p className="modal-description" dangerouslySetInnerHTML={{ __html: selectedProject.description }} />
             )}
+            <div className="modal-meta">
+              {selectedProject.period && <span className="meta-item">📅 {selectedProject.period}</span>}
+              {selectedProject.members && <span className="meta-item">👥 {selectedProject.members}</span>}
+            </div>
             {selectedProject.tech && (
               <div className="modal-tech-tags">
                 {selectedProject.tech.map((tag, i) => (
