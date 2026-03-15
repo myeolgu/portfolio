@@ -9,16 +9,16 @@ import cubeImg from '../assets/images/projects/cube.jpg';
 export const projects = [
   {
     id: 1,
-    title: 'LG화학 메인 리뉴얼',
-    description: 'GSAP을 처음 도입한 프로젝트로, 메인 페이지 마크업과 스크립트를 단독으로 담당했습니다. 새로운 기술 학습과 구현에 도전하며 성장할 수 있었던 보람찬 경험이었습니다.',
-    tech: ['HTML5', 'SCSS', 'JavaScript', 'GSAP'],
+    title: 'LG화학 채용 사이트 메인 리뉴얼',
+    description: '입사 5~6개월 차에 삼성자산운용 운영 업무와 병행하며, 단 일주일이라는 촉박한 기한 내에 메인 페이지의 고난도 인터랙션을 완수했습니다. GSAP을 전사 최초로 도입하며 기술적 한계를 돌파한 핵심 프로젝트입니다.',
+    tech: ['HTML5', 'SCSS', 'JavaScript', 'GSAP (ScrollTrigger)', 'SVG Animation'],
     link: 'https://www.lgchem.com/career/index',
     image: lgchemImg,
     background: '#ffffff',
     thumbnailHeight: '4rem',
-    problem: '정적인 뷰를 넘어 사용자 이탈을 막기 위해 시각적으로 몰입감 있는 동적 인터랙션이 요구되었습니다.',
-    action: '처음으로 GSAP 라이브러리를 도입하여 스크롤 기반의 패럴랙스 애니메이션과 부드러운 트랜지션을 모듈화하여 설계했습니다.',
-    result: '메인 페이지 체류 시간을 기존 대비 20% 이상 개선했으며, 동적 인터랙션 구현 역량을 크게 확장하는 계기가 되었습니다.'
+    problem: '브랜드 가치를 높이기 위한 정교한 스크롤 애니메이션과 SVG 드로잉 효과가 필요했으나, 짧은 기한과 생소한 기술(GSAP)이라는 제약이 있었습니다.',
+    action: 'GSAP ScrollTrigger를 독학하여 도입하고, SVG path 애니메이션을 통해 시각적 요소를 유기적으로 연결했습니다. 멀티태스킹을 통해 운영 업무와 병행하며 마감 기한을 준수했습니다.',
+    result: '생소한 기술과 촉박한 일정이라는 불확실성 속에서도, 적극적인 학습을 통해 기획 의도를 100% 구현하며 기한 내 성공적으로 마감했습니다.'
   },
   {
     id: 2,

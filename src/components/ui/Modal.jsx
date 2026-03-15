@@ -35,42 +35,42 @@ const Modal = () => {
         </button>
 
 
-        {/* 우측: 텍스트 및 상세 스토리 영역 */}
+        {/* 메인 콘텐츠 영역 */}
         <div className="modal-content">
           <div className="modal-header">
             <h2 className="modal-title">{selectedProject.title}</h2>
           </div>
 
           <div className="modal-body">
-            {/* 배경 및 목표 (문제 상황) */}
-            {selectedProject.problem && (
-              <section className="insight-section">
-                <h3 className="insight-title">
-                  <Activity size={18} /> 배경 및 목표 (The Challenge)
-                </h3>
+            {/* 프로젝트 요약 / 배경 */}
+            <section className="insight-section">
+              <h3 className="insight-title">
+                <Activity size={18} /> 배경 및 목표 (The Challenge)
+              </h3>
+              <div className="insight-text-box">
                 <p className="insight-text">{selectedProject.problem}</p>
-              </section>
-            )}
+              </div>
+            </section>
 
             {/* 해결 과정 (액션) */}
-            {selectedProject.action && (
-              <section className="insight-section">
-                <h3 className="insight-title">
-                  <Wrench size={18} /> 기술적 의사결정 (Action)
-                </h3>
+            <section className="insight-section">
+              <h3 className="insight-title">
+                <Wrench size={18} /> 기술적 의사결정 (Action)
+              </h3>
+              <div className="insight-text-box">
                 <p className="insight-text">{selectedProject.action}</p>
-              </section>
-            )}
+              </div>
+            </section>
 
             {/* 비즈니스 임팩트 (결과) */}
-            {selectedProject.result && (
-              <section className="insight-section">
-                <h3 className="insight-title highlight">
-                  <Trophy size={18} /> 비즈니스 임팩트 (Result & Insight)
-                </h3>
+            <section className="insight-section">
+              <h3 className="insight-title highlight">
+                <Trophy size={18} /> 비즈니스 임팩트 (Result & Insight)
+              </h3>
+              <div className="insight-text-box highlight">
                 <p className="insight-text">{selectedProject.result}</p>
-              </section>
-            )}
+              </div>
+            </section>
           </div>
 
           {/* 하단 CTA (프로젝트 보러가기) */}
